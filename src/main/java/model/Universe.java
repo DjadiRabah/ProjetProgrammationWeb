@@ -40,6 +40,12 @@ public class Universe {
 		rat.setHpMax(20);
 		rat.setAttack(2);
 		monsters.add(rat);
+		
+		Character bandit = new Character();
+		bandit.setName("bandit de grand chemin");
+		bandit.setHpMax(10);
+		bandit.setAttack(5);
+		monsters.add(bandit);
 
 		Character gobelin = new Character();
 		gobelin.setName("gobelin");
