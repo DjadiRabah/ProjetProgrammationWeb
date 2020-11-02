@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mon Personnage</title>
+<link rel="stylesheet" href="general.css">
+<script src="cookies.js"></script>
+</head>
+<body>
+
+<p> 
+Nom : <span id="nameValue" class="bold"></span> <br>
+HP : <span id="HPValue" class="bold" ></span><br>
+Attaque : <span id="attackValue" class="bold"></span><br>
+Esquive : <span id="dodgeValue" class="bold"></span><br>
+</p>
+
+
+<script>
+//cherche et affiche le nom
+document.getElementById("nameValue").innerHTML = findValueCookie("name"); 
+document.getElementById("attackValue").innerHTML = findValueCookie("attack"); 
+document.getElementById("HPValue").innerHTML = findValueCookie("HP"); 
+document.getElementById("dodgeValue").innerHTML = findValueCookie("dodge"); 
+</script>
+
+<a href="/takeOrDodgeDammage.html" id="isKo">Recevoir un coup</a>
+
+<p id="ko"></p>
+<a href="/chooseCharacter.html" id="chooseCharacter"></a>
+
+<script>
+if (parseInt(findValueCookie("HP")) == 0)
+{
+	document.getElementById("ko").innerHTML = "le personnage est ko"
+	document.getElementById("isKo").disabled = true;
+	document.getElementById("chooseCharacter").innerHTML = "Choisir un personnage";
+	document.getElementById("chooseCharacter").className="button";
+}
+</script>
+
+</body>
+</html>
