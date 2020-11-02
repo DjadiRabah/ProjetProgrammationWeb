@@ -7,14 +7,14 @@
 <script src="cookies.js"></script>
 </head>
 <body>
-
-<p> 
-Nom : <span id="nameValue" class="bold"></span> <br>
-HP : <span id="HPValue" class="bold" ></span><br>
-Attaque : <span id="attackValue" class="bold"></span><br>
-Esquive : <span id="dodgeValue" class="bold"></span><br>
-</p>
-
+<div>
+	<p> 
+	Nom : <span id="nameValue" class="bold"></span> <br>
+	HP : <span id="HPValue" class="bold" ></span><br>
+	Attaque : <span id="attackValue" class="bold"></span><br>
+	Esquive : <span id="dodgeValue" class="bold"></span><br>
+	</p>
+</div>
 
 <script>
 //cherche et affiche le nom
@@ -24,7 +24,7 @@ document.getElementById("HPValue").innerHTML = findValueCookie("HP");
 document.getElementById("dodgeValue").innerHTML = findValueCookie("dodge"); 
 </script>
 
-<a href="/takeOrDodgeDammage.html" id="isKo">Recevoir un coup</a>
+<a href="/fightPage.html" id="isKo">Recevoir un coup</a>
 
 <p id="ko"></p>
 <a href="/chooseCharacter.html" id="chooseCharacter"></a>

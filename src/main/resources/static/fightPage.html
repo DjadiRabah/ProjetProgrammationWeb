@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Page de combat</title>
+<link rel="stylesheet" href="general.css">
+<script src="cookies.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+</br></br></br>
+<div class="container jumbotron" id="action" id="contexte">
+  <p class="text-center">Contexte</p>
+</div>
+<div class="container text-center" id="combat">
+	
+  <div class="row row-eq-height">
+  
+    <div class="col-sm-4">
+      <img src="" alt="gentil" class="img-responsive" id="gentil">
+      
+       <div class="progress progress-striped active">
+ 		 <div class="progress-bar" style="width: 70%"> pdv/pdv</div>
+		</div>
+		
+    </div>
+    <div class="col-sm-4">
+      <img src="image/versus.jpg" alt="versus" class="img-responsive" id="versus" >
+    	
+    </div>
+    <div class="col-sm-4">
+    
+     	<img src="image/orc.jpg" alt="gentil" class="img-responsive" id="mechant" >
+      
+       	<div class="progress progress-striped active">
+ 		 <div class="progress-bar" style="width: 70%"> pdv/pdv</div>
+		</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</br>
+</br>
+<div class="container jumbotron" id="se_Passe">
+  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+ 
+</div>
+
+
+<div class="container jumbotron" id="action">
+  <h2>actions:</h2>
+  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <p><a class="btn btn-primary btn-lg">Learn more</a></p>
+</div>
+
+
+
+
+<script>
+		name = findValueCookie("name"); 
+		console.log(name);
+		var gentils = document.getElementById("gentil");
+		var gentilsphoto = gentils.getAttribute("src");
+ 		if (name == "Gimli") 		
+ 		{
+			gentilsphoto = "image/nain.jpg";
+ 		}
+		else
+		{
+			gentilsphoto = "photo/.jpg";
+			<!---document.body.style.backgroundImage = "url('image/gimli_att.jpg')"; pour le CSS modifier dedans-->
+		}
+		gentils.setAttribute("src", gentilsphoto);
+		
+</script>
+</body>
+</html>
+
+
