@@ -21,6 +21,12 @@ public class Universe {
 		nain.setHpMax(150);
 		nain.setAttack(25);
 		characters.add(nain);
+		
+		Character orc = new Character();
+		orc.setName("Grumaux");
+		orc.setHpMax(25);
+		orc.setAttack(5);
+		characters.add(orc);
 
 		Character elf = new Character();
 		elf.setName("Legolas");

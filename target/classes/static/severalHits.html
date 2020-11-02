@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="general.css">
+	<script src="cookies.js"></script>
+	<title>Insert title here</title>
+</head>
+
+	<body>
+		<p>Dégats déjà pris : <input id="totalDamage" value=0 disabled="true"> </p>
+		<p>Dégats :  <input type="number" id="nbDammage"> <button id="damage" type="submit" onclick="damage()">Retirer</button></p>
+		<p id="hasDodged"></p>
+		<a id="submitButton" href="showCharacter.html" onclick="applyDamage()"></a>
+
+	
+	<script>
+function damage(){
+	var  dmg = document.getElementById("nbDammage")
+
+	dodge = findValueCookie("dodge")
+
+	if (document.getElementById("nbDammage").value !== "")
+    {
+		if (Math.random() < dodge)
+		{
+			document.getElementById('hasDodged').innerHTML="esquive";
+		}
+		else
+		{
+			document.getElementById('hasDodged').innerHTML="Aïe";
+			document.getElementById('submitButton').innerHTML = "Prendre les dégâts";
+			var total = document.getElementById('totalDamage').value;
+			
+			if(parseInt(total) + parseInt(dmg.value) <= findValueCookie("HP")) 
+				document.getElementById('totalDamage').value = parseInt(total) + parseInt(dmg.value);
+			else
+				document.getElementById('totalDamage').value = parseInt(findValueCookie("HP"))
+			
+			
+			document.getElementById('submitButton').innerHTML="Prendre les dégâts";
+			document.getElementById('submitButton').className="button";
+		}
+	}
+}
+
+function applyDamage()
+{
+	var hp = findValueCookie("HP");
+	var total = document.getElementById('totalDamage').value;
+	if (hp < total)
+		hp = 0
+	else
+		hp = hp - total
+
+	document.cookie = "HP=" + hp;
+}
+
+
+</script>
+	</body>
+</html>

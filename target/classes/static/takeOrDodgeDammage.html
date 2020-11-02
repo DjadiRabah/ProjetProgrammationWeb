@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Take or Dodge</title>
+
+<link rel="stylesheet" href="general.css">
+<script src="cookies.js"></script>
+</head>
+<body>
+<form  action="/takeDammage" method="get" id="form">
+        <label for="nbDammage">Dégats :</label>
+        <input type="number" id="nbDammage" name="dammage">
+
+<a id="testButton" class="button" onclick="draw()">Esquive ?</a>
+
+<div id="takeOrDodge">
+<br>
+</div>
+    <div>
+   <button id="submitButton" type="submit" style="display:none disabled">Souffrir</button>
+    </div>
+</form>
+<p id="hasDodged"></p>
+<a id="showCharacter" href="showCharacter.html"></a>
+
+
+<script>
+function draw(){
+	var  dmg = document.getElementById("nbDammage")
+	if (document.getElementById("nbDammage").value !== "")
+    {
+    	document.getElementById('testButton').innerHTML="tricher";
+    	
+		dodge = findValueCookie("dodge")
+		Math.random()
+		if (Math.random() < dodge)
+		{
+			console.log("esquive");
+			document.getElementById('hasDodged').innerHTML="esquive";
+			document.getElementById('submitButton').disabled = true;
+			document.getElementById('showCharacter').innerHTML="Afficher la fiche personnage";
+		}
+		else
+		{
+			console.log("touché");
+			document.getElementById('hasDodged').innerHTML="touché";
+			document.getElementById('submitButton').disabled = false;
+		}
+	}
+}
+</script>
+
+</body>
+</html>
