@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 03 nov. 2020 à 07:50
+-- Généré le :  mar. 03 nov. 2020 à 12:38
 -- Version du serveur :  10.3.12-MariaDB
 -- Version de PHP :  7.3.1
 
@@ -32,10 +32,11 @@ DROP TABLE IF EXISTS `characterprojet`;
 CREATE TABLE IF NOT EXISTS `characterprojet` (
   `idCharacter` int(11) NOT NULL AUTO_INCREMENT,
   `nameCharacter` varchar(30) NOT NULL,
-  `hpCharacter` int(11) DEFAULT NULL,
-  `attackCharacter` int(11) DEFAULT NULL,
-  `defenseCharacter` int(11) DEFAULT NULL,
-  `dodgeCharacter` double DEFAULT NULL,
+  `loreCharacter` varchar(250) DEFAULT NULL,
+  `hpCharacter` int(11) NOT NULL,
+  `attackCharacter` int(11) NOT NULL,
+  `defenseCharacter` int(11) NOT NULL,
+  `dodgeCharacter` double NOT NULL,
   PRIMARY KEY (`idCharacter`),
   UNIQUE KEY `naleCharacterUnique` (`nameCharacter`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
@@ -44,8 +45,8 @@ CREATE TABLE IF NOT EXISTS `characterprojet` (
 -- Déchargement des données de la table `characterprojet`
 --
 
-INSERT INTO `characterprojet` (`idCharacter`, `nameCharacter`, `hpCharacter`, `attackCharacter`, `defenseCharacter`, `dodgeCharacter`) VALUES
-(1, 'test', 100, 200, 300, 400);
+INSERT INTO `characterprojet` (`idCharacter`, `nameCharacter`, `loreCharacter`, `hpCharacter`, `attackCharacter`, `defenseCharacter`, `dodgeCharacter`) VALUES
+(1, 'test', 'LORE', 100, 200, 300, 400);
 
 -- --------------------------------------------------------
 

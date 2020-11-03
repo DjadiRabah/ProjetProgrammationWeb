@@ -4,6 +4,7 @@ public class Character
 {
 	private int id;
 	private String name;
+	private String lore;
 	private int hpMax;
 	private int attack;
 	private int defense;
@@ -12,15 +13,17 @@ public class Character
 	/**
 	 * @param id
 	 * @param name
+	 * @param lore
 	 * @param hpMax
 	 * @param attack
 	 * @param defense
 	 * @param dodge
 	 */
-	public Character(int id, String name, int hpMax, int attack, int defense, double dodge) {
+	public Character(int id, String name, String lore, int hpMax, int attack, int defense, double dodge) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.lore = lore;
 		this.hpMax = hpMax;
 		this.attack = attack;
 		this.defense = defense;
@@ -39,6 +42,13 @@ public class Character
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	/**
+	 * @return the lore
+	 */
+	public String getLore() {
+		return lore;
 	}
 
 	/**
@@ -82,6 +92,13 @@ public class Character
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	/**
+	 * @param name the name to set
+	 */
+	public void setLore(String lore) {
+		this.lore = lore;
+	}
 
 	/**
 	 * @param hpMax the hpMax to set
@@ -114,6 +131,6 @@ public class Character
 	@Override
 	public String toString() 
 	{
-		return name + "\nHP : " + hpMax + "\nAttack : " + attack + "\nDefense : " + defense + "\nDodge : " + dodge;
+		return name + "\n" + lore + "\nHP : " + hpMax + "\nAttack : " + attack + "\nDefense : " + defense + "\nDodge : " + dodge;
 	}
 }

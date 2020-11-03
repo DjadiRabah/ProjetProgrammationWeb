@@ -37,11 +37,12 @@ public class CharacterDao  extends Dao
 		    {
 		    	int id = resultSet.getInt("idCharacter");
 		    	String name = resultSet.getString("nameCharacter");
+		    	String lore = resultSet.getString("loreCharacter");
 		    	int hp = resultSet.getInt("hpCharacter");
 		    	int attack = resultSet.getInt("attackCharacter");
 		    	int defense = resultSet.getInt("defenseCharacter");
 		    	double dodge = resultSet.getDouble("dodgeCharacter");
-		    	characters.add(new Character(id, name, hp, attack, defense, dodge));
+		    	characters.add(new Character(id, name, lore, hp, attack, defense, dodge));
 			}
 		    
 		    return characters;
