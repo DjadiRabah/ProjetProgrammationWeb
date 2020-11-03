@@ -6761,11 +6761,6 @@ legend {
   color: #333333;
 }
 
-.img-responsive{
- 	width: 100%;
- 	height: 100%;
- 	
-}
 .row-eq-height{
     display: -webkit-box;
     display: -webkit-flex;
