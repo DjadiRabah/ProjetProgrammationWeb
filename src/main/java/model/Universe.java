@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import pojo.Character;
+
 public class Universe {
 
 	private static ArrayList<Character> characters = new ArrayList<Character>();
@@ -16,45 +18,45 @@ public class Universe {
 	}
 
 	public static void creation() {
-		Character nain = new Character();
-		nain.setName("Gimli");
-		nain.setHpMax(150);
-		nain.setAttack(25);
-		characters.add(nain);
-		
-		Character orc = new Character();
-		orc.setName("Grumaux");
-		orc.setHpMax(25);
-		orc.setAttack(5);
-		characters.add(orc);
-
-		Character elf = new Character();
-		elf.setName("Legolas");
-		elf.setHpMax(30);
-		elf.setAttack(15);
-		elf.setDodgeProbability(0.5);
-		characters.add(elf);
-
-		Character rat = new Character();
-		rat.setName("rat");
-		rat.setHpMax(20);
-		rat.setAttack(2);
-		monsters.add(rat);
-		
-		Character bandit = new Character();
-		bandit.setName("bandit de grand chemin");
-		bandit.setHpMax(10);
-		bandit.setAttack(5);
-		monsters.add(bandit);
-
-		Character gobelin = new Character();
-		gobelin.setName("gobelin");
-		gobelin.setHpMax(80);
-		gobelin.setAttack(10);
-		monsters.add(gobelin);		
-
-		Character dragon = new Character("dragon", 3000, 100);
-		monsters.add(dragon);
+//		Character nain = new Character();
+//		nain.setName("Gimli");
+//		nain.setHpMax(150);
+//		nain.setAttack(25);
+//		characters.add(nain);
+//		
+//		Character orc = new Character();
+//		orc.setName("Grumaux");
+//		orc.setHpMax(25);
+//		orc.setAttack(5);
+//		characters.add(orc);
+//
+//		Character elf = new Character();
+//		elf.setName("Legolas");
+//		elf.setHpMax(30);
+//		elf.setAttack(15);
+//		elf.setDodgeProbability(0.5);
+//		characters.add(elf);
+//
+//		Character rat = new Character();
+//		rat.setName("rat");
+//		rat.setHpMax(20);
+//		rat.setAttack(2);
+//		monsters.add(rat);
+//		
+//		Character bandit = new Character();
+//		bandit.setName("bandit de grand chemin");
+//		bandit.setHpMax(10);
+//		bandit.setAttack(5);
+//		monsters.add(bandit);
+//
+//		Character gobelin = new Character();
+//		gobelin.setName("gobelin");
+//		gobelin.setHpMax(80);
+//		gobelin.setAttack(10);
+//		monsters.add(gobelin);		
+//
+//		Character dragon = new Character("dragon", 3000, 100);
+//		monsters.add(dragon);
 
 	}
 

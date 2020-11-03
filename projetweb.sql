@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 03 nov. 2020 à 00:37
+-- Généré le :  mar. 03 nov. 2020 à 07:50
 -- Version du serveur :  10.3.12-MariaDB
 -- Version de PHP :  7.3.1
 
@@ -25,26 +25,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `character`
+-- Structure de la table `characterprojet`
 --
 
-DROP TABLE IF EXISTS `character`;
-CREATE TABLE IF NOT EXISTS `character` (
+DROP TABLE IF EXISTS `characterprojet`;
+CREATE TABLE IF NOT EXISTS `characterprojet` (
   `idCharacter` int(11) NOT NULL AUTO_INCREMENT,
-  `nameCharacter` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `nameCharacter` varchar(30) NOT NULL,
   `hpCharacter` int(11) DEFAULT NULL,
   `attackCharacter` int(11) DEFAULT NULL,
   `defenseCharacter` int(11) DEFAULT NULL,
-  `dodgeCharacter` int(11) DEFAULT NULL,
+  `dodgeCharacter` double DEFAULT NULL,
   PRIMARY KEY (`idCharacter`),
   UNIQUE KEY `naleCharacterUnique` (`nameCharacter`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Déchargement des données de la table `character`
+-- Déchargement des données de la table `characterprojet`
 --
 
-INSERT INTO `character` (`idCharacter`, `nameCharacter`, `hpCharacter`, `attackCharacter`, `defenseCharacter`, `dodgeCharacter`) VALUES
+INSERT INTO `characterprojet` (`idCharacter`, `nameCharacter`, `hpCharacter`, `attackCharacter`, `defenseCharacter`, `dodgeCharacter`) VALUES
 (1, 'test', 100, 200, 300, 400);
 
 -- --------------------------------------------------------
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `hpItem` int(11) DEFAULT NULL,
   `attackItem` int(11) DEFAULT NULL,
   `defenseItem` int(11) DEFAULT NULL,
-  `dodgeItem` int(11) DEFAULT NULL,
+  `dodgeItem` double DEFAULT NULL,
   PRIMARY KEY (`idItem`),
   UNIQUE KEY `itemName` (`nameItem`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;

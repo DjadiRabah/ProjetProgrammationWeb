@@ -13,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import model.Character;
 import model.Universe;
+import pojo.Character;
 
 @Controller
 public class MyController {
@@ -74,7 +74,7 @@ public class MyController {
 			response.addCookie(cookieName);
 			response.addCookie(new Cookie("HP", "" + chosen.getHpMax()));
 			response.addCookie(new Cookie("attack", "" + chosen.getAttack()));
-			response.addCookie(new Cookie("dodge", "" + chosen.getDodgeProbability()));
+			response.addCookie(new Cookie("dodge", "" + chosen.getDodge()));
 		}
 		response.sendRedirect("/showCharacter.html");
 	}

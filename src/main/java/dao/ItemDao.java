@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Pojo.Item;
+import pojo.Item;
 
 public class ItemDao extends Dao
 {
@@ -40,9 +40,8 @@ public class ItemDao extends Dao
 		    	int hp = resultSet.getInt("hpItem");
 		    	int attack = resultSet.getInt("attackItem");
 		    	int defense = resultSet.getInt("defenseItem");
-		    	int dodge = resultSet.getInt("dodgeItem");
+		    	double dodge = resultSet.getDouble("dodgeItem");
 		    	items.add(new Item(id, name, hp, attack, defense, dodge));
-		    	System.out.println(new Item(id, name, hp, attack, defense, dodge));
 			}
 		    
 		    return items;
