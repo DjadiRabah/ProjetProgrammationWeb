@@ -30,16 +30,17 @@ public class CharacterDao  extends Dao<Character>
 	{
 		try 
 		{
-			String query =  "INSERT INTO " + this.table + "(idCharacter, nameCharacter, loreCharacter, hpCharacter, attackCharacter, defenseCharacter, dodgeCharacter) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String query =  "INSERT INTO " + this.table + "(idCharacter, nameCharacter, loreCharacter,fileName, hpCharacter, attackCharacter, defenseCharacter, dodgeCharacter) VALUES (?,?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStatement = DaoConnection.getInstance().prepareStatement(query);
 			preparedStatement.setInt(1, pojo.getId());
 			preparedStatement.setString (2, pojo.getName());
 			preparedStatement.setString (3, pojo.getLore());
-			preparedStatement.setInt(4, pojo.getHpMax());
-			preparedStatement.setInt(5, pojo.getAttack());
-			preparedStatement.setInt(6, pojo.getDefense());
-			preparedStatement.setDouble(7, pojo.getDodge());
+			preparedStatement.setString (4, pojo.getFileName());
+			preparedStatement.setInt(5, pojo.getHpMax());
+			preparedStatement.setInt(6, pojo.getAttack());
+			preparedStatement.setInt(7, pojo.getDefense());
+			preparedStatement.setDouble(8, pojo.getDodge());
 			
 			preparedStatement.execute();
 			preparedStatement.close();
@@ -61,14 +62,16 @@ public class CharacterDao  extends Dao<Character>
 		    ResultSet resultSet = statement.executeQuery(sql);
 		    while (resultSet.next()) 
 		    {
+		    		// java = BDcollone
 		    	int id = resultSet.getInt("idCharacter");
 		    	String name = resultSet.getString("nameCharacter");
 		    	String lore = resultSet.getString("loreCharacter");
+		    	String fileName = resultSet.getString("filenameCharacter");
 		    	int hp = resultSet.getInt("hpCharacter");
 		    	int attack = resultSet.getInt("attackCharacter");
 		    	int defense = resultSet.getInt("defenseCharacter");
 		    	double dodge = resultSet.getDouble("dodgeCharacter");
-		    	characters.add(new Character(id, name, lore, hp, attack, defense, dodge));
+		    	characters.add(new Character(id, name, lore, fileName,hp, attack, defense, dodge));
 			}
 		    resultSet.close();
 		    statement.close();

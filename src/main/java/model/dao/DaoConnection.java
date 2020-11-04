@@ -19,7 +19,7 @@ public class DaoConnection
 
 	        String protocole =  "jdbc:mysql:";
 	        String ip =  "localhost";
-	        String port =  "3306";  
+	        String port =  "3307";  
 	        String dataBaseName =  "projetweb" + "?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
 	        
 

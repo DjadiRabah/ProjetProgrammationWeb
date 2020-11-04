@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 03 nov. 2020 à 12:38
--- Version du serveur :  10.3.12-MariaDB
--- Version de PHP :  7.3.1
+-- Hôte : 127.0.0.1:3307
+-- Généré le : mer. 04 nov. 2020 à 23:12
+-- Version du serveur :  10.4.13-MariaDB
+-- Version de PHP : 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `projetweb`
+-- Base de données : `projetweb`
 --
 
 -- --------------------------------------------------------
@@ -33,20 +32,22 @@ CREATE TABLE IF NOT EXISTS `characterprojet` (
   `idCharacter` int(11) NOT NULL AUTO_INCREMENT,
   `nameCharacter` varchar(30) NOT NULL,
   `loreCharacter` varchar(250) DEFAULT NULL,
+  `filenameCharacter` varchar(20) NOT NULL COMMENT 'L''image de ton personage',
   `hpCharacter` int(11) NOT NULL,
   `attackCharacter` int(11) NOT NULL,
   `defenseCharacter` int(11) NOT NULL,
   `dodgeCharacter` double NOT NULL,
   PRIMARY KEY (`idCharacter`),
   UNIQUE KEY `naleCharacterUnique` (`nameCharacter`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Déchargement des données de la table `characterprojet`
 --
 
-INSERT INTO `characterprojet` (`idCharacter`, `nameCharacter`, `loreCharacter`, `hpCharacter`, `attackCharacter`, `defenseCharacter`, `dodgeCharacter`) VALUES
-(1, 'test', 'LORE', 100, 200, 300, 400);
+INSERT INTO `characterprojet` (`idCharacter`, `nameCharacter`, `loreCharacter`, `filenameCharacter`, `hpCharacter`, `attackCharacter`, `defenseCharacter`, `dodgeCharacter`) VALUES
+(1, 'test', 'LORE', 'orc.jpg', 100, 200, 300, 400),
+(2, 'Aurelien', 'JE suis aurelien 1er du nom', 'nain.jpg', 500, 20, 20, 1);
 
 -- --------------------------------------------------------
 
