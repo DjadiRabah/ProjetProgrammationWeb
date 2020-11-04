@@ -1,4 +1,4 @@
-package dao;
+package model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,15 +6,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import pojo.Item;
+import model.pojo.Item;
 
-public class ItemDao extends Dao
+public class ItemDao extends Dao<Item>
 {
 	private static ItemDao itemDao;
 	
 	private ItemDao() 
 	{
 		this.table = "Item";
+	}
+	
+	@Override
+	public void insert(Item pojo) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	public static synchronized ItemDao getInstance()

@@ -1,8 +1,9 @@
 package progWeb.controller;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -13,8 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import model.Universe;
-import pojo.Character;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+
+import model.dao.DaoFactory;
+import model.pojo.Character;
 
 @Controller
 public class MyController {
@@ -61,12 +65,12 @@ public class MyController {
 	public void choiceCharacter(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String charName = request.getParameter("name");
 		Character chosen = null;
-		ArrayList<Character> chars = Universe.getCharacters();
-		for (Character c : Universe.getCharacters()) {
-			if (c.getName().equals(charName)) {
-				chosen = c;
-			}
-		}
+//		ArrayList<Character> chars = Universe.getCharacters();
+//		for (Character c : Universe.getCharacters()) {
+//			if (c.getName().equals(charName)) {
+//				chosen = c;
+//			}
+//		}
 		if (chosen != null) {
 			response.setHeader("HP", "" + chosen.getHpMax());
 			response.setHeader("attack", "" + chosen.getAttack());
@@ -131,14 +135,30 @@ public class MyController {
 			}
 		}
 		try {
-			Character foe = Universe.getMonsters().get(previousFoe + 1);
-			response.addCookie(new Cookie("foeNumber", "" + (previousFoe + 1)));
-			response.addCookie(new Cookie("foeName", foe.getName()));
-			response.addCookie(new Cookie("foeHP", " " + foe.getHpMax()));
-			response.addCookie(new Cookie("foeAttack", "" + foe.getAttack()));
+//			Character foe = Universe.getMonsters().get(previousFoe + 1);
+//			response.addCookie(new Cookie("foeNumber", "" + (previousFoe + 1)));
+//			response.addCookie(new Cookie("foeName", foe.getName()));
+//			response.addCookie(new Cookie("foeHP", " " + foe.getHpMax()));
+//			response.addCookie(new Cookie("foeAttack", "" + foe.getAttack()));
 		} catch (IndexOutOfBoundsException e) {
 			response.getOutputStream().write("Tous les ennemis sont vaincus".getBytes("UTF-8"));
 		}
 	}
-
+	
+	@RequestMapping(value = "/insertCharacter", method = RequestMethod.GET)
+	public void insertCharacter(HttpServletRequest request, HttpServletResponse response)
+			throws UnsupportedEncodingException, IOException 
+	{
+		String json = request.getParameter("json");
+		Character pojo = new Gson().fromJson(json, Character.class);
+		DaoFactory.getInstance().getCharacterDao().insert(pojo);
+	}
+	
+	@RequestMapping(value = "/characters", method = RequestMethod.GET)
+	public void getCharacters(HttpServletRequest request, HttpServletResponse response)
+			throws UnsupportedEncodingException, IOException 
+	{
+		List<Character> characters = DaoFactory.getInstance().getCharacterDao().getAll();
+		response.getOutputStream().write(new Gson().toJson(characters).getBytes("UTF-8"));
+	}
 }

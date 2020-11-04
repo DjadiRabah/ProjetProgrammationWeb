@@ -1,4 +1,4 @@
-package dao;
+package model.dao;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -51,5 +51,15 @@ public class DaoConnection
 		if (connection == null)
 			new DaoConnection();
 		return connection;
+	}
+	
+	public void close()
+	{
+		try {
+			this.connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

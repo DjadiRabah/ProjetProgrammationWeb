@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Éditeur de niveau</title>
+<link rel="stylesheet" href="general.css">
+<script src="js/json.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<h1 class="text-center">Éditeur de niveau</h1>
+	</div>
+
+	<div class="container text-center" id="characters">
+		<h2>Les personnages</h2>
+	</div>
+	<script>
+		var request = new XMLHttpRequest();
+		request.open('GET', 'characters');
+		request.onload = function() {
+			if(request.status === 200)
+			{
+				var characters = document.getElementById("characters");
+				var charactersJson = JSON.parse(request.responseText);	
+				
+				var first = true;
+				
+				for (const character of charactersJson) 
+				{
+					if (first)
+					{
+						addJsonKeysToDiv(characters, character);
+						addCreateTupleDiv("Character", character, characters);
+						first = false;
+					}
+					addJsonValuesToDiv(characters, character);				
+				}
+			}
+			else
+			{
+				console.log("fail " + request.status);
+			}
+		};
+		request.send();
+	</script>
+</body>
+</html>

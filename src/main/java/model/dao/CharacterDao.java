@@ -1,14 +1,15 @@
-package dao;
+package model.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import pojo.Character;
+import model.pojo.Character;
 
-public class CharacterDao  extends Dao
+public class CharacterDao  extends Dao<Character>
 {
 	private static CharacterDao characterDao; 
 	
@@ -22,6 +23,31 @@ public class CharacterDao  extends Dao
 		if (characterDao == null)
 			characterDao = new CharacterDao();
 		return characterDao;
+	}
+	
+	@Override
+	public void insert(Character pojo) 
+	{
+		try 
+		{
+			String query =  "INSERT INTO " + this.table + "(idCharacter, nameCharacter, loreCharacter, hpCharacter, attackCharacter, defenseCharacter, dodgeCharacter) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			
+			PreparedStatement preparedStatement = DaoConnection.getInstance().prepareStatement(query);
+			preparedStatement.setInt(1, pojo.getId());
+			preparedStatement.setString (2, pojo.getName());
+			preparedStatement.setString (3, pojo.getLore());
+			preparedStatement.setInt(4, pojo.getHpMax());
+			preparedStatement.setInt(5, pojo.getAttack());
+			preparedStatement.setInt(6, pojo.getDefense());
+			preparedStatement.setDouble(7, pojo.getDodge());
+			
+			preparedStatement.execute();
+			preparedStatement.close();
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -44,6 +70,8 @@ public class CharacterDao  extends Dao
 		    	double dodge = resultSet.getDouble("dodgeCharacter");
 		    	characters.add(new Character(id, name, lore, hp, attack, defense, dodge));
 			}
+		    resultSet.close();
+		    statement.close();
 		    
 		    return characters;
 		} 
@@ -54,5 +82,4 @@ public class CharacterDao  extends Dao
 		}
 	    return null;
 	}
-
 }

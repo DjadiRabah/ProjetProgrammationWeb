@@ -1,27 +1,30 @@
-package pojo;
+package model.pojo;
 
-public class Item 
+public class Character 
 {
 	private int id;
 	private String name;
-	private int hpItem;
+	private String lore;
+	private int hpMax;
 	private int attack;
 	private int defense;
 	private double dodge;
-	
+
 	/**
 	 * @param id
 	 * @param name
-	 * @param hpItem
+	 * @param lore
+	 * @param hpMax
 	 * @param attack
 	 * @param defense
 	 * @param dodge
 	 */
-	public Item(int id, String name, int hpItem, int attack, int defense, double dodge) {
+	public Character(int id, String name, String lore, int hpMax, int attack, int defense, double dodge) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.hpItem = hpItem;
+		this.lore = lore;
+		this.hpMax = hpMax;
 		this.attack = attack;
 		this.defense = defense;
 		this.dodge = dodge;
@@ -42,10 +45,17 @@ public class Item
 	}
 	
 	/**
-	 * @return the hpItem
+	 * @return the lore
 	 */
-	public int getHpItem() {
-		return hpItem;
+	public String getLore() {
+		return lore;
+	}
+
+	/**
+	 * @return the hpMax
+	 */
+	public int getHpMax() {
+		return hpMax;
 	}
 
 	/**
@@ -82,12 +92,19 @@ public class Item
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	/**
+	 * @param name the name to set
+	 */
+	public void setLore(String lore) {
+		this.lore = lore;
+	}
 
 	/**
-	 * @param hpItem the hpItem to set
+	 * @param hpMax the hpMax to set
 	 */
-	public void setHpItem(int hpItem) {
-		this.hpItem = hpItem;
+	public void setHpMax(int hpMax) {
+		this.hpMax = hpMax;
 	}
 
 	/**
@@ -114,7 +131,6 @@ public class Item
 	@Override
 	public String toString() 
 	{
-		return name + "\nHP : " + hpItem + "\nAttack : " + attack
-				+ "\nDefense : " + defense + "\nDodge : " + dodge;
+		return name + "\n" + lore + "\nHP : " + hpMax + "\nAttack : " + attack + "\nDefense : " + defense + "\nDodge : " + dodge;
 	}
 }
