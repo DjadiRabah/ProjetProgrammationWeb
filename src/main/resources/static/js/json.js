@@ -29,51 +29,16 @@ function addJsonKeysToDiv(div, json)
 	div.appendChild(row);
 }
 
-function addCreateTupleDiv(table, json, div)
-{
-	var row = document.createElement('div');
-	row.className = "row";
-	for (value in json)
-	{
-		var col = document.createElement('div');
-		col.className = "col-sm-1";
-		
-		var input = document.createElement('input');
-		input.className = "form-control";
-		input.id = value + table;
-		col.appendChild(input);
-		
-		if(value === "id")
-		{
-			input.value = 0;
-			input.disabled = true;
-		}
-		
-		row.appendChild(col);
-	}					
-	var buttonsSize = 12 - getJsonLength(json);
-	var divButtons = document.createElement('div');
-	divButtons.className = "col-sm-" + buttonsSize;
-	
-	var divButtonAdd = document.createElement('a');
-	divButtonAdd.className = "btn btn-success";
-	divButtonAdd.onclick = insertPojo.bind(this, [table, getJsonKeys(json)]);
-	divButtonAdd.innerHTML = "Ajouter";
-	
-	divButtons.appendChild(divButtonAdd);
-	row.appendChild(divButtons);
-	div.appendChild(row);
-}
-
 function addJsonValuesToDiv(div, json)
 {
 	var row = document.createElement('div');
 	row.className = "row";
-	for (value in json)
+
+	for (key in json)
 	{
 		var divValue = document.createElement('div');
 		divValue.className = "col-sm-1";
-		divValue.innerHTML += json[value];
+		divValue.innerHTML += json[key];
 		row.appendChild(divValue);
 	}					
 	var buttonsSize = 12 - getJsonLength(json);
@@ -83,6 +48,7 @@ function addJsonValuesToDiv(div, json)
 	var divButtonUpdate = document.createElement('a');
 	divButtonUpdate.className = "btn btn-warning";
 	divButtonUpdate.innerHTML = "Modifier";
+	divButtonUpdate.href = "formCharacter.html?id=" + json["id"];
 	
 	divButtons.appendChild(divButtonUpdate);
 	row.appendChild(divButtons);
@@ -104,7 +70,6 @@ function insertPojo(params)
 	}
 	
 	json += '}';
-	console.log(json);
 	
 	$.ajax({
            type: "GET",                     

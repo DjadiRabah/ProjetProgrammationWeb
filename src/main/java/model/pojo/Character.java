@@ -5,141 +5,146 @@ public class Character
 	private int id;
 	private String name;
 	private String lore;
-	private String fileName;
+	private String filename;
 	private int hpMax;
 	private int attack;
 	private int defense;
 	private double dodge;
 
-	
-	
-	public Character(int id, String name, String lore, String fileName, int hpMax, int attack, int defense,
+	/**
+	 * @param id
+	 * @param name
+	 * @param lore
+	 * @param filename
+	 * @param hpMax
+	 * @param attack
+	 * @param defense
+	 * @param dodge
+	 */
+	public Character(int id, String name, String lore, String filename, int hpMax, int attack, int defense,
 			double dodge) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.lore = lore;
-		this.fileName = fileName;
+		this.filename = filename;
 		this.hpMax = hpMax;
 		this.attack = attack;
 		this.defense = defense;
 		this.dodge = dodge;
 	}
-	
-	
 
-
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
-
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-
-
-
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
-
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-
-
+	/**
+	 * @return the lore
+	 */
 	public String getLore() {
 		return lore;
 	}
 
-
-
-
-	public void setLore(String lore) {
-		this.lore = lore;
+	/**
+	 * @return the filename
+	 */
+	public String getFilename() {
+		return filename;
 	}
 
-
-
-
-	public String getFileName() {
-		return fileName;
-	}
-
-
-
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-
-
-
+	/**
+	 * @return the hpMax
+	 */
 	public int getHpMax() {
 		return hpMax;
 	}
 
-
-
-
-	public void setHpMax(int hpMax) {
-		this.hpMax = hpMax;
-	}
-
-
-
-
+	/**
+	 * @return the attack
+	 */
 	public int getAttack() {
 		return attack;
 	}
 
-
-
-
-	public void setAttack(int attack) {
-		this.attack = attack;
-	}
-
-
-
-
+	/**
+	 * @return the defense
+	 */
 	public int getDefense() {
 		return defense;
 	}
 
-
-
-
-	public void setDefense(int defense) {
-		this.defense = defense;
-	}
-
-
-
-
+	/**
+	 * @return the dodge
+	 */
 	public double getDodge() {
 		return dodge;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
+	/**
+	 * @param lore the lore to set
+	 */
+	public void setLore(String lore) {
+		this.lore = lore;
+	}
 
+	/**
+	 * @param filename the filename to set
+	 */
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	/**
+	 * @param hpMax the hpMax to set
+	 */
+	public void setHpMax(int hpMax) {
+		this.hpMax = hpMax;
+	}
+
+	/**
+	 * @param attack the attack to set
+	 */
+	public void setAttack(int attack) {
+		this.attack = attack;
+	}
+
+	/**
+	 * @param defense the defense to set
+	 */
+	public void setDefense(int defense) {
+		this.defense = defense;
+	}
+
+	/**
+	 * @param dodge the dodge to set
+	 */
 	public void setDodge(double dodge) {
 		this.dodge = dodge;
 	}
-
-
-
 
 	@Override
 	public String toString() 

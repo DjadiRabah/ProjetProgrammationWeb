@@ -18,7 +18,8 @@ public class ItemDao extends Dao<Item>
 	}
 	
 	@Override
-	public void insert(Item pojo) {
+	public int insert(Item pojo) {
+		return 0;
 		// TODO Auto-generated method stub
 		
 	}
@@ -58,5 +59,17 @@ public class ItemDao extends Dao<Item>
 			e.printStackTrace();
 		}
 	    return null;
+	}
+
+	@Override
+	public Item getById(int idPojo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void update(Item pojo) {
+		// TODO Auto-generated method stub
+		
 	}
 }

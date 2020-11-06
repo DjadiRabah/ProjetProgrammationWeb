@@ -12,7 +12,7 @@
 		<h1 class="text-center">Éditeur de niveau</h1>
 	</div>
 
-	<div class="container text-center" id="characters">
+	<div class="container-fluid text-center" id="characters">
 		<h2>Les personnages</h2>
 	</div>
 	<script>
@@ -30,8 +30,18 @@
 				{
 					if (first)
 					{
+						var addButtonRow = document.createElement('div');
+						addButtonRow.className = "row";
+						
+						var addButton = document.createElement('a');
+						addButton.className = "btn btn-success";
+						addButton.innerHTML = "Ajouter";
+						addButton.href = "formCharacter.html?id=0";
+						
+						addButtonRow.appendChild(addButton);
+						characters.appendChild(addButtonRow);
+						
 						addJsonKeysToDiv(characters, character);
-						addCreateTupleDiv("Character", character, characters);
 						first = false;
 					}
 					addJsonValuesToDiv(characters, character);				

@@ -1,6 +1,5 @@
-package progWeb.controller;
+package controller;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -13,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 
 import model.dao.DaoFactory;
 import model.pojo.Character;
@@ -150,15 +149,10 @@ public class MyController {
 			throws UnsupportedEncodingException, IOException 
 	{
 		String json = request.getParameter("json");
+		System.out.println(json);
 		Character pojo = new Gson().fromJson(json, Character.class);
-		DaoFactory.getInstance().getCharacterDao().insert(pojo);
-	}
-	
-	@RequestMapping(value = "/characters", method = RequestMethod.GET)
-	public void getCharacters(HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException, IOException 
-	{
-		List<Character> characters = DaoFactory.getInstance().getCharacterDao().getAll();
-		response.getOutputStream().write(new Gson().toJson(characters).getBytes("UTF-8"));
+		System.out.println(pojo);
+//		int id = DaoFactory.getInstance().getCharacterDao().insert(pojo);
+//		response.sendRedirect("/formCharacter.html?id=" + id);
 	}
 }
