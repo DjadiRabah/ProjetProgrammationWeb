@@ -46,7 +46,7 @@ function addJsonValuesToDiv(div, json)
 	divButtons.className = "col-sm-" + buttonsSize;
 	
 	var divButtonUpdate = document.createElement('a');
-	divButtonUpdate.className = "btn btn-warning";
+	divButtonUpdate.className = "btn btn-warning btn-lg btn-block";
 	divButtonUpdate.innerHTML = "Modifier";
 	divButtonUpdate.href = "formCharacter.html?id=" + json["id"];
 	

@@ -13,12 +13,12 @@
 	<div class="container-fluid text-center">
 		<h1 id="title">Créer un personnage</h1>
 
-		<div>
-			<a class="btn btn-primary" href="/levelEditor.html">Éditeur de
-				niveau</a>
+		<div class="btn-group btn-group-justified" id="buttons">
+			<a class="btn btn-primary btn-lg btn-block" href="/levelEditor.html">Éditeur
+				de niveau</a>
 		</div>
 
-		<form class="form-horizontal">
+		<form class="form-horizontal" id="formCharacter">
 			<fieldset>
 				<legend>Formulaire</legend>
 
@@ -86,11 +86,11 @@
 					</div>
 				</div>
 
-
-
-				<div class="col-lg-10 col-lg-offset-2">
-					<button type="reset" class="btn btn-warning" id="reset">Annuler</button>
-					<a class="btn btn-success" onclick="insertCharacter()" id="submit">Créer</a>
+				<div class="form-group">
+					<div class="btn-group btn-group-justified">
+						<a class="btn btn-warning btn-lg btn-block" onclick="resetForm()" id="reset">Annuler</a> 
+						<a class="btn btn-success btn-lg btn-block" onclick="insertCharacter()" id="submit">Créer</a>
+					</div>
 				</div>
 
 			</fieldset>
@@ -102,12 +102,24 @@
 		if (id !== 0) {
 			getPojoById("character", id, setForm);
 		}
+		
+		function resetForm()
+		{
+			document.getElementById("formCharacter").reset();
+		}
 
 		function setForm(pojo) {
 			if (pojo === null)
 				window.location.replace("formCharacter.html?id=0");
 			else {
 				document.getElementById("title").innerHTML = "Modifier un personnage";
+				
+				var buttons = document.getElementById("buttons");
+				var createCharacter = document.createElement("a");
+				createCharacter.innerHTML = "Créer un personnage";
+				createCharacter.className = "btn btn-info btn-lg btn-block";
+				createCharacter.href = "formCharacter.html?id=0";
+				buttons.appendChild(createCharacter);
 
 				for (key in pojo) {
 					var element = document.getElementById(key + "Character");
@@ -135,7 +147,7 @@
 			};
 			insertPojo("Character", json);
 		}
-		
+
 		function updateCharacter() {
 			var json = {
 				id : parseInt(document.getElementById("idCharacter").value),
