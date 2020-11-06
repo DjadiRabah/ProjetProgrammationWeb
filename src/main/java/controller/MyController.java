@@ -123,36 +123,4 @@ public class MyController {
 		response.sendRedirect("/showCharacter.html");
 
 	}
-
-	@RequestMapping(value = "/nextFoe", method = RequestMethod.GET)
-	public void nextFoe(HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException, IOException {
-		int previousFoe = -1;
-		for (Cookie c : request.getCookies()) {
-			if (c.getName().equals("foeNumber")) {
-				previousFoe = Integer.parseInt(c.getValue());
-			}
-		}
-		try {
-//			Character foe = Universe.getMonsters().get(previousFoe + 1);
-//			response.addCookie(new Cookie("foeNumber", "" + (previousFoe + 1)));
-//			response.addCookie(new Cookie("foeName", foe.getName()));
-//			response.addCookie(new Cookie("foeHP", " " + foe.getHpMax()));
-//			response.addCookie(new Cookie("foeAttack", "" + foe.getAttack()));
-		} catch (IndexOutOfBoundsException e) {
-			response.getOutputStream().write("Tous les ennemis sont vaincus".getBytes("UTF-8"));
-		}
-	}
-	
-	@RequestMapping(value = "/insertCharacter", method = RequestMethod.GET)
-	public void insertCharacter(HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException, IOException 
-	{
-		String json = request.getParameter("json");
-		System.out.println(json);
-		Character pojo = new Gson().fromJson(json, Character.class);
-		System.out.println(pojo);
-//		int id = DaoFactory.getInstance().getCharacterDao().insert(pojo);
-//		response.sendRedirect("/formCharacter.html?id=" + id);
-	}
 }

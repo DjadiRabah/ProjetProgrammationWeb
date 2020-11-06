@@ -12,19 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import model.dao.DaoFactory;
 import model.pojo.Character;
 
 @Controller
 public class CharacterController
-{
-	@RequestMapping(value = "/formCharacter", method = RequestMethod.POST)
-	public void insertCharacter(HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException, IOException 
-	{
-		System.out.println("LOL");
-	}
-	
+{	
 	@RequestMapping(value = "/character", method = RequestMethod.GET)
 	public @ResponseBody Character getCharacterById(HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException, IOException 
@@ -49,7 +44,18 @@ public class CharacterController
 			throws UnsupportedEncodingException, IOException 
 	{
 		String json = request.getParameter("json");
-		System.out.println(json);
+		Character pojo = new Gson().fromJson(json, Character.class);
+		DaoFactory.getInstance().getCharacterDao().update(pojo);
+	}
+	
+	@RequestMapping(value = "/insertCharacter", method = RequestMethod.GET)
+	public @ResponseBody String insertCharacter(HttpServletRequest request, HttpServletResponse response)
+			throws UnsupportedEncodingException, IOException 
+	{
+		String json = request.getParameter("json");
+		Character pojo = new Gson().fromJson(json, Character.class);
+		int id = DaoFactory.getInstance().getCharacterDao().insert(pojo);
+		return "/formCharacter.html?id="+id;
 	}
 
 }

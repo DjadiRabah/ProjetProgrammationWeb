@@ -20,36 +20,44 @@ function getPojoById(table, id, callBack)
 	request.send();
 }
 
-function updatePojo(table, json)
+function insertPojo(table, jsonObject)
 {
-	var request = new XMLHttpRequest();
-	request.open('GET', "update" + table);
-	
-	request.onload = function() {
-		if(request.status === 200)
-		{
-			request.responseText;
-		}
-		else
-		{
-			console.log("fail " + request.status);
-		}
-	};
-	request.send();
-}
-
-function insertPojo(table, json)
-{
-	console.log(json);
+	var json = JSON.stringify(jsonObject);
+	var url = 
 	$.ajax({
         type: "GET",                     
         url:'/insert' + table,  
         data: {json : json},       
         dataType: "json",
         contentType: "application/json",
-        success : function(data){            
+        success : function(data){
          },
          error : function(data) {
+        	 window.location.href = data["responseText"];
+         },
+         done : function(data)
+         {
+        	 console.log("DONE");
+         }
+  });
+}
+
+function updatePojo(table, jsonObject)
+{
+	var json = JSON.stringify(jsonObject);
+	var url = 
+	$.ajax({
+        type: "GET",                     
+        url:'/update' + table,  
+        data: {json : json},       
+        dataType: "json",
+        contentType: "application/json",
+        success : function(data){
+         },
+         error : function(data) {
+         },
+         done : function(data)
+         {
          }
   });
 }

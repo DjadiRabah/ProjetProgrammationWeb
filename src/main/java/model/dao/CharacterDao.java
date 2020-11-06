@@ -28,7 +28,7 @@ public class CharacterDao extends Dao<Character> {
 			String query = "INSERT INTO " + this.table
 					+ "(idCharacter, nameCharacter, loreCharacter, filenameCharacter, hpCharacter, attackCharacter, defenseCharacter, dodgeCharacter) VALUES (?,?, ?, ?, ?, ?, ?, ?)";
 
-			PreparedStatement preparedStatement = DaoConnection.getInstance().prepareStatement(query);
+			PreparedStatement preparedStatement = DaoConnection.getInstance().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt(1, pojo.getId());
 			preparedStatement.setString(2, pojo.getName());
 			preparedStatement.setString(3, pojo.getLore());
@@ -37,10 +37,13 @@ public class CharacterDao extends Dao<Character> {
 			preparedStatement.setInt(6, pojo.getAttack());
 			preparedStatement.setInt(7, pojo.getDefense());
 			preparedStatement.setDouble(8, pojo.getDodge());
-			preparedStatement.execute();
+			preparedStatement.executeUpdate();
 			
-			int id =  preparedStatement.getGeneratedKeys().getInt(0);
+			ResultSet resultSet = preparedStatement.getGeneratedKeys();
+			resultSet.next();
+			int id =  resultSet.getInt(1);
 			preparedStatement.close();
+			resultSet.close();
 			
 			return id;
 		} catch (SQLException e) {
@@ -116,8 +119,8 @@ public class CharacterDao extends Dao<Character> {
 	{
 		try 
 		{
-			String sql =  "UPDATE " + this.table + " SET nameCharacter = ?, loreCharacter = ?,filenameCharacter = ?, hpCharacter = ?, attackCharacter = ?, defenseCharacter = ?, dodgeCharacter = ?)"
-					+ "WHERE idCharacter = ?";
+			String sql =  "UPDATE " + this.table + " SET nameCharacter = ?, loreCharacter = ?,filenameCharacter = ?, hpCharacter = ?, attackCharacter = ?, defenseCharacter = ?, dodgeCharacter = ?"
+					+ " WHERE idCharacter = ?";
 			PreparedStatement statement = DaoConnection.getInstance().prepareStatement(sql);    
 			statement.setString(1, pojo.getName());
 			statement.setString(2, pojo.getLore());
@@ -127,8 +130,7 @@ public class CharacterDao extends Dao<Character> {
 			statement.setInt(6, pojo.getDefense());
 			statement.setDouble(7, pojo.getDefense());
 			statement.setInt(8, pojo.getId());
-		    ResultSet resultSet = statement.executeQuery();
-		    resultSet.close();
+		    statement.executeUpdate();
 		    statement.close();
 		}
 		catch (SQLException e) 

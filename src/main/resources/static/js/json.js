@@ -17,7 +17,7 @@ function addJsonKeysToDiv(div, json)
 	for (key in keys)
 	{
 		var divKey = document.createElement('div');
-		divKey.className = "col-sm-1";
+		divKey.className = "col-sm-1 panel panel-default";
 		divKey.innerHTML += keys[key];
 		row.appendChild(divKey);
 	}
@@ -54,33 +54,3 @@ function addJsonValuesToDiv(div, json)
 	row.appendChild(divButtons);
 	div.appendChild(row);
 }
-
-function insertPojo(params) 
-{
-	var table = params[0];
-	var keys = params[1];
-	
-	var json = '{';
-	
-	for(var i = 0; i < keys.length; i++)
-	{
-		json += keys[i] + ":" + "'" + document.getElementById(keys[i] + table).value + "'";
-		if (i < keys.length - 1)
-			json += ",";
-	}
-	
-	json += '}';
-	
-	$.ajax({
-           type: "GET",                     
-           url:'/insert' + table,  
-           data: {json : json},       
-           dataType: "json",
-           contentType: "application/json",
-           success : function(data){            
-            },
-            error : function(data) {
-            }
-     });
-	}
-
