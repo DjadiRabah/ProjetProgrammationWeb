@@ -16,6 +16,6 @@ public class SpringLauncher {
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, IOException 
 	{
 		SpringApplication.run(SpringLauncher.class, args);
-		OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+		
 	}
 }

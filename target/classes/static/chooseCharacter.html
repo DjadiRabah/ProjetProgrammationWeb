@@ -8,6 +8,12 @@
 </head>
 <body>
 
+	<h1 class= "text-center" id="charactername"> Nom du personnage</h1>
+
+	<ul class="breadcrumb" id="lorecharacter">
+	  <li class="active">Lore personage</li>
+	</ul>
+
 	<div class="container text-center" id="">
 
 		<div class="row row-eq-height">
@@ -27,7 +33,46 @@
 					class="img-responsive" id="">
 				</a>
 			</div>
+		
+	</div>
+	<br>
+	<div class="row  " id="">
+		<div class="panel panel-primary col-sm-3">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Point de vie</h3>
+		  </div>
+		  <div class="panel-body" id="life">
+		    pdv
+		  </div>
 		</div>
+		<div class="panel panel-primary col-sm-3">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Attaque</h3>
+		  </div>
+		  <div class="panel-body" id="attack">
+		    
+		  </div>
+		</div>
+		<div class="panel panel-primary col-sm-3">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Defense</h3>
+		  </div>
+		  <div class="panel-body" id="defense">
+						   
+		  </div>
+		</div>
+		<div class="panel panel-primary col-sm-3">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Esquive</h3>
+		  </div>
+		  <div class="panel-body" id="dodge">
+		    
+		  </div>
+		</div>
+	</div>
+<div>
+<a href="index.html" class="btn btn-danger btn-lg btn-block">Commencer l'aventure</a>
+<a href="index.html" class="btn btn-success btn-lg btn-block">Retour à l'accueil</a>
 	</div>
 	<script>
 let currentCharacter = 1;
@@ -43,12 +88,20 @@ function displayCharacter(){
 			if(request.status === 200)
 			{
 				var charactersJson = JSON.parse(request.responseText);	
-				console.log(charactersJson[currentCharacter]["fileName"]);
+				console.log(charactersJson[currentCharacter]["filename"]);
+				
+				document.getElementById('lorecharacter').innerHTML= charactersJson[currentCharacter]["lore"];
+				document.getElementById('charactername').innerHTML= charactersJson[currentCharacter]["name"];
+				
+				document.getElementById('life').innerHTML= charactersJson[currentCharacter]["hpMax"];
+				document.getElementById('attack').innerHTML= charactersJson[currentCharacter]["attack"];
+				document.getElementById('defense').innerHTML= charactersJson[currentCharacter]["defense"];
+				document.getElementById('dodge').innerHTML= charactersJson[currentCharacter]["dodge"];
 				maxCharacter = charactersJson.length;
 				
 				var perso = document.getElementById("perso");
 				var photoprincipal = perso.getAttribute("src");
-				photoprincipal = "image/"+ charactersJson[currentCharacter]["fileName"];
+				photoprincipal = "image/"+ charactersJson[currentCharacter]["filename"];
 				perso.setAttribute("src", photoprincipal);
 			}
 			else

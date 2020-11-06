@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="general.css">
+<title>Formulaire personnage</title>
+<script src="js/ajax.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<div class="container-fluid text-center">
+		<h1 id="title">Créer un personnage</h1>
+
+		<div class="btn-group btn-group-justified" id="buttons">
+			<a class="btn btn-primary btn-lg btn-block" href="/levelEditor.html">Éditeur
+				de niveau</a>
+		</div>
+
+		<form class="form-horizontal" id="formCharacter">
+			<fieldset>
+				<legend>Formulaire</legend>
+
+				<div class="form-group">
+					<label for="idCharacter" class="col-lg-2 control-label">Id</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="idCharacter"
+							placeholder="id" disabled value=0>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="nameCharacter" class="col-lg-2 control-label">Nom</label>
+					<div class="col-lg-10">
+						<input type="text" class="form-control" id="nameCharacter"
+							placeholder="Nom du personnage">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="loreCharacter" class="col-lg-2 control-label">Lore</label>
+					<div class="col-lg-10">
+						<textarea class="form-control" rows="3" id="loreCharacter"
+							placeholder="Lore du personnage"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="filenameCharacter" class="col-lg-2 control-label">Image</label>
+					<div class="col-lg-10">
+						<input type="text" class="form-control" id="filenameCharacter"
+							placeholder="Chemin de l'image du personnage">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="hpCharacter" class="col-lg-2 control-label">Vie</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="hpMaxCharacter"
+							placeholder="Vie max du personnage" min=0>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="attackCharacter" class="col-lg-2 control-label">Attaque</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="attackCharacter"
+							placeholder="Attaque du personnage" min=0>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="defenseCharacter" class="col-lg-2 control-label">Défense</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="defenseCharacter"
+							placeholder="Défense du personnage" min=0>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="dodgeCharacter" class="col-lg-2 control-label">Esquive</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="dodgeCharacter"
+							placeholder="Esquive du personnage" min=0 max=1 step="0.01">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="btn-group btn-group-justified">
+						<a class="btn btn-warning btn-lg btn-block" onclick="resetForm()" id="reset">Annuler</a> 
+						<a class="btn btn-success btn-lg btn-block" onclick="insertCharacter()" id="submit">Créer</a>
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+	</div>
+	<script>
+		var id = parseInt(new URLSearchParams(window.location.search).get('id'));
+
+		if (id !== 0) {
+			getPojoById("character", id, setForm);
+		}
+		
+		function resetForm()
+		{
+			document.getElementById("formCharacter").reset();
+		}
+
+		function setForm(pojo) {
+			if (pojo === null)
+				window.location.replace("formCharacter.html?id=0");
+			else {
+				document.getElementById("title").innerHTML = "Modifier un personnage";
+				
+				var buttons = document.getElementById("buttons");
+				var createCharacter = document.createElement("a");
+				createCharacter.innerHTML = "Créer un personnage";
+				createCharacter.className = "btn btn-info btn-lg btn-block";
+				createCharacter.href = "formCharacter.html?id=0";
+				buttons.appendChild(createCharacter);
+
+				for (key in pojo) {
+					var element = document.getElementById(key + "Character");
+					element.value = pojo[key];
+				}
+
+				document.getElementById("reset").disabled = true;
+
+				var submit = document.getElementById("submit");
+				submit.onclick = updateCharacter
+				submit.innerHTML = "Modifier";
+			}
+		}
+
+		function insertCharacter() {
+			var json = {
+				id : parseInt(document.getElementById("idCharacter").value),
+				name : document.getElementById("nameCharacter").value,
+				lore : document.getElementById("loreCharacter").value,
+				filename : document.getElementById("filenameCharacter").value,
+				hpMax : parseInt(document.getElementById("hpMaxCharacter").value),
+				attack : parseInt(document.getElementById("attackCharacter").value),
+				defense : parseInt(document.getElementById("defenseCharacter").value),
+				dodge : parseFloat(document.getElementById("dodgeCharacter").value),
+			};
+			insertPojo("Character", json);
+		}
+
+		function updateCharacter() {
+			var json = {
+				id : parseInt(document.getElementById("idCharacter").value),
+				name : document.getElementById("nameCharacter").value,
+				lore : document.getElementById("loreCharacter").value,
+				filename : document.getElementById("filenameCharacter").value,
+				hpMax : parseInt(document.getElementById("hpMaxCharacter").value),
+				attack : parseInt(document.getElementById("attackCharacter").value),
+				defense : parseInt(document.getElementById("defenseCharacter").value),
+				dodge : parseFloat(document.getElementById("dodgeCharacter").value),
+			};
+			updatePojo("Character", json);
+		}
+	</script>
+</body>
+</html>

@@ -36,6 +36,7 @@ public class CharacterController
 	public @ResponseBody List<Character> getCharacters(HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException, IOException 
 	{
+		System.out.println("java");
 		return DaoFactory.getInstance().getCharacterDao().getAll();
 	}
 	
