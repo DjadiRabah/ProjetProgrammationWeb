@@ -39,6 +39,7 @@ function addJsonValuesToDiv(div, json)
 		var divValue = document.createElement('div');
 		divValue.className = "col-sm-1";
 		divValue.innerHTML += json[key];
+		divValue.style.wordWrap = "break-word";
 		row.appendChild(divValue);
 	}					
 	var buttonsSize = 12 - getJsonLength(json);

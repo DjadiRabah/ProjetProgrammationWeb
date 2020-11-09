@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import model.dao.Dao;
 import model.dao.DaoFactory;
 import model.pojo.Character;
 
@@ -36,7 +37,6 @@ public class CharacterController
 	public @ResponseBody List<Character> getCharacters(HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException, IOException 
 	{
-		System.out.println("java");
 		return DaoFactory.getInstance().getCharacterDao().getAll();
 	}
 	
@@ -58,5 +58,4 @@ public class CharacterController
 		int id = DaoFactory.getInstance().getCharacterDao().insert(pojo);
 		return "/formCharacter.html?id="+id;
 	}
-
 }

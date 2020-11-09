@@ -71,11 +71,11 @@ public class MyController {
 //			}
 //		}
 		if (chosen != null) {
-			response.setHeader("HP", "" + chosen.getHpMax());
+			response.setHeader("HP", "" + chosen.getHp());
 			response.setHeader("attack", "" + chosen.getAttack());
 			Cookie cookieName = new Cookie("name", charName);
 			response.addCookie(cookieName);
-			response.addCookie(new Cookie("HP", "" + chosen.getHpMax()));
+			response.addCookie(new Cookie("HP", "" + chosen.getHp()));
 			response.addCookie(new Cookie("attack", "" + chosen.getAttack()));
 			response.addCookie(new Cookie("dodge", "" + chosen.getDodge()));
 		}

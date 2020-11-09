@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="general.css">
+<title>Formulaire d'histoire</title>
+<script src="js/ajax.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<div class="container-fluid text-center">
+		<h1 id="title">Créer une histoire</h1>
+
+		<div class="btn-group btn-group-justified" id="buttons">
+			<a class="btn btn-primary btn-lg btn-block" href="/levelEditor.html">Éditeur
+				de niveau</a>
+		</div>
+
+		<form class="form-horizontal" id="formStory">
+			<fieldset>
+				<legend>Formulaire</legend>
+
+				<div class="form-group">
+					<label for="idStory" class="col-lg-2 control-label">Id</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="idStory"
+							placeholder="id" disabled value=0>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="nameStory" class="col-lg-2 control-label">Nom</label>
+					<div class="col-lg-10">
+						<input type="text" class="form-control" id="nameStory"
+							placeholder="Nom" maxlength=30>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="synopsisStory" class="col-lg-2 control-label">Synopsis</label>
+					<div class="col-lg-10">
+						<textarea class="form-control" rows="3" id="synopsisStory"
+							placeholder="Synopsis" maxlength=250></textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="btn-group btn-group-justified">
+						<a class="btn btn-warning btn-lg btn-block" onclick="resetForm()"
+							id="reset">Annuler</a> <a
+							class="btn btn-success btn-lg btn-block" onclick="insertStory()"
+							id="submit">Créer</a>
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+	</div>
+	<script>
+		var id = parseInt(new URLSearchParams(window.location.search).get('id'));
+
+		if (id !== 0) {
+			getPojoById("story", id, setForm);
+		}
+
+		function resetForm() {
+			document.getElementById("formStory").reset();
+		}
+
+		function setForm(pojo) {
+			if (pojo === null)
+				window.location.replace("formStory.html?id=0");
+			else {
+				document.getElementById("title").innerHTML = "Modifier une histoire";
+
+				var buttons = document.getElementById("buttons");
+				var createStory = document.createElement("a");
+				createStory.innerHTML = "Créer une histoire";
+				createStory.className = "btn btn-info btn-lg btn-block";
+				createStory.href = "formStory.html?id=0";
+				buttons.appendChild(createStory);
+
+				for (key in pojo) {
+					var element = document.getElementById(key + "Story");
+					element.value = pojo[key];
+				}
+
+				document.getElementById("reset").disabled = true;
+
+				var submit = document.getElementById("submit");
+				submit.onclick = updateStory
+				submit.innerHTML = "Modifier";
+			}
+		}
+
+		function insertStory() {
+			var json = {
+				id : parseInt(document.getElementById("idStory").value),
+				name : document.getElementById("nameStory").value,
+				synopsis : document.getElementById("synopsisStory").value
+			};
+			insertPojo("Story", json);
+		}
+
+		function updateStory() {
+			var json = {
+				id : parseInt(document.getElementById("idStory").value),
+				name : document.getElementById("nameStory").value,
+				synopsis : document.getElementById("synopsisStory").value
+			};
+			updatePojo("Story", json);
+		}
+	</script>
+</body>
+</html>

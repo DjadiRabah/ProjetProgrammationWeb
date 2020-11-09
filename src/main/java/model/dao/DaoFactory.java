@@ -24,5 +24,10 @@ public class DaoFactory
 	{
 		return ItemDao.getInstance();
 	}
+	
+	public StoryDao getStoryDao()
+	{
+		return StoryDao.getInstance();
+	}
 
 }

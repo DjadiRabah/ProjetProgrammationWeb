@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="general.css">
+<title>Formulaire item</title>
+<script src="js/ajax.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<div class="container-fluid text-center">
+		<h1 id="title">Créer un item</h1>
+
+		<div class="btn-group btn-group-justified" id="buttons">
+			<a class="btn btn-primary btn-lg btn-block" href="/levelEditor.html">Éditeur
+				de niveau</a>
+		</div>
+
+		<form class="form-horizontal" id="formItem">
+			<fieldset>
+				<legend>Formulaire</legend>
+
+				<div class="form-group">
+					<label for="idItem" class="col-lg-2 control-label">Id</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="idItem"
+							placeholder="id" disabled value=0>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="nameItem" class="col-lg-2 control-label">Nom</label>
+					<div class="col-lg-10">
+						<input type="text" class="form-control" id="nameItem"
+							placeholder="Nom" maxlength=30>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="hpItem" class="col-lg-2 control-label">Vie</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="hpItem"
+							placeholder="Vie" min=0 max=2147483647>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="attackItem" class="col-lg-2 control-label">Attaque</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="attackItem"
+							placeholder="Attaque" min=0 max=2147483647>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="defenseItem" class="col-lg-2 control-label">Défense</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="defenseItem"
+							placeholder="Défense" min=0 max=2147483647>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="dodgeItem" class="col-lg-2 control-label">Esquive</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="dodgeItem"
+							placeholder="Esquive" min=0 max=1 step="0.01">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="btn-group btn-group-justified">
+						<a class="btn btn-warning btn-lg btn-block" onclick="resetForm()" id="reset">Annuler</a> 
+						<a class="btn btn-success btn-lg btn-block" onclick="insertItem()" id="submit">Créer</a>
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+	</div>
+	<script>
+		var id = parseInt(new URLSearchParams(window.location.search).get('id'));
+
+		if (id !== 0) {
+			getPojoById("item", id, setForm);
+		}
+		
+		function resetForm()
+		{
+			document.getElementById("formItem").reset();
+		}
+
+		function setForm(pojo) {
+			if (pojo === null)
+				window.location.replace("formItem.html?id=0");
+			else {
+				document.getElementById("title").innerHTML = "Modifier un item";
+				
+				var buttons = document.getElementById("buttons");
+				var createItem = document.createElement("a");
+				createItem.innerHTML = "Créer un item";
+				createItem.className = "btn btn-info btn-lg btn-block";
+				createItem.href = "formItem.html?id=0";
+				buttons.appendChild(createItem);
+
+				for (key in pojo) {
+					var element = document.getElementById(key + "Item");
+					element.value = pojo[key];
+				}
+
+				document.getElementById("reset").disabled = true;
+
+				var submit = document.getElementById("submit");
+				submit.onclick = updateItem
+				submit.innerHTML = "Modifier";
+			}
+		}
+
+		function insertItem() {
+			var json = {
+				id : parseInt(document.getElementById("idItem").value),
+				name : document.getElementById("nameItem").value,
+				hp : parseInt(document.getElementById("hpItem").value),
+				attack : parseInt(document.getElementById("attackItem").value),
+				defense : parseInt(document.getElementById("defenseItem").value),
+				dodge : parseFloat(document.getElementById("dodgeItem").value),
+			};
+			insertPojo("Item", json);
+		}
+
+		function updateItem() {
+			var json = {
+				id : parseInt(document.getElementById("idItem").value),
+				name : document.getElementById("nameItem").value,
+				hp : parseInt(document.getElementById("hpItem").value),
+				attack : parseInt(document.getElementById("attackItem").value),
+				defense : parseInt(document.getElementById("defenseItem").value),
+				dodge : parseFloat(document.getElementById("dodgeItem").value),
+			};
+			updatePojo("Item", json);
+		}
+	</script>
+</body>
+</html>

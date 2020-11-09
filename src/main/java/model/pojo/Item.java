@@ -4,24 +4,33 @@ public class Item
 {
 	private int id;
 	private String name;
-	private int hpItem;
+	private int hp;
 	private int attack;
 	private int defense;
 	private double dodge;
 	
+	
+	
+	/**
+	 * 
+	 */
+	public Item() {
+		super();
+	}
+
 	/**
 	 * @param id
 	 * @param name
-	 * @param hpItem
+	 * @param hp
 	 * @param attack
 	 * @param defense
 	 * @param dodge
 	 */
-	public Item(int id, String name, int hpItem, int attack, int defense, double dodge) {
+	public Item(int id, String name, int hp, int attack, int defense, double dodge) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.hpItem = hpItem;
+		this.hp = hp;
 		this.attack = attack;
 		this.defense = defense;
 		this.dodge = dodge;
@@ -44,8 +53,8 @@ public class Item
 	/**
 	 * @return the hpItem
 	 */
-	public int getHpItem() {
-		return hpItem;
+	public int getHp() {
+		return hp;
 	}
 
 	/**
@@ -86,8 +95,8 @@ public class Item
 	/**
 	 * @param hpItem the hpItem to set
 	 */
-	public void setHpItem(int hpItem) {
-		this.hpItem = hpItem;
+	public void setHp(int hp) {
+		this.hp = hp;
 	}
 
 	/**
@@ -114,7 +123,7 @@ public class Item
 	@Override
 	public String toString() 
 	{
-		return name + "\nHP : " + hpItem + "\nAttack : " + attack
+		return name + "\nHP : " + hp + "\nAttack : " + attack
 				+ "\nDefense : " + defense + "\nDodge : " + dodge;
 	}
 }

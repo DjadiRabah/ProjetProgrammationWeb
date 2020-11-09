@@ -6,29 +6,38 @@ public class Character
 	private String name;
 	private String lore;
 	private String filename;
-	private int hpMax;
+	private int hp;
 	private int attack;
 	private int defense;
 	private double dodge;
+	
+
+	/**
+	 * 
+	 */
+	public Character()
+	{
+		super();
+	}
 
 	/**
 	 * @param id
 	 * @param name
 	 * @param lore
 	 * @param filename
-	 * @param hpMax
+	 * @param hp
 	 * @param attack
 	 * @param defense
 	 * @param dodge
 	 */
-	public Character(int id, String name, String lore, String filename, int hpMax, int attack, int defense,
+	public Character(int id, String name, String lore, String filename, int hp, int attack, int defense,
 			double dodge) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.lore = lore;
 		this.filename = filename;
-		this.hpMax = hpMax;
+		this.hp = hp;
 		this.attack = attack;
 		this.defense = defense;
 		this.dodge = dodge;
@@ -63,10 +72,10 @@ public class Character
 	}
 
 	/**
-	 * @return the hpMax
+	 * @return the hp
 	 */
-	public int getHpMax() {
-		return hpMax;
+	public int getHp() {
+		return hp;
 	}
 
 	/**
@@ -121,8 +130,8 @@ public class Character
 	/**
 	 * @param hpMax the hpMax to set
 	 */
-	public void setHpMax(int hpMax) {
-		this.hpMax = hpMax;
+	public void setHp(int hp) {
+		this.hp = hp;
 	}
 
 	/**
@@ -149,6 +158,6 @@ public class Character
 	@Override
 	public String toString() 
 	{
-		return name + "\n" + lore + "\nHP : " + hpMax + "\nAttack : " + attack + "\nDefense : " + defense + "\nDodge : " + dodge;
+		return name + "\n" + lore + "\nHP : " + hp + "\nAttack : " + attack + "\nDefense : " + defense + "\nDodge : " + dodge;
 	}
 }

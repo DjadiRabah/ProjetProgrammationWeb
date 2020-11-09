@@ -4,56 +4,98 @@
 <meta charset="UTF-8">
 <title>Éditeur de niveau</title>
 <link rel="stylesheet" href="general.css">
+<script src="js/ajax.js"></script>
 <script src="js/json.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
+		<a class="btn btn-info btn-lg btn-block" href="index.html">Retourner
+			au menu principal</a>
 		<h1 class="text-center">Éditeur de niveau</h1>
 	</div>
-
-	<div class="container-fluid text-center" id="characters">
-		<h2>Les personnages</h2>
-	</div>
 	<script>
-		var request = new XMLHttpRequest();
-		request.open('GET', 'characters');
-		request.onload = function() {
-			if(request.status === 200)
+		displayTable("Story", "Les histoires");
+		displayTable("Character", "Les personnages");
+		displayTable("Item", "Les items");
+
+		function displayTable(table, title) {
+			var container = document.createElement("div");
+			container.className = "container-fluid text-center";
+			container.id = "container" + table;
+
+			var titleDiv = document.createElement("h2");
+			titleDiv.innerHTML = title;
+			container.appendChild(titleDiv);
+
+			var addButton = document.createElement("a");
+			addButton.className = "btn btn-primary btn-lg btn-block";
+			addButton.innerHTML = "Ajouter";
+			addButton.href = "form" + table + ".html?id=0";
+			container.appendChild(addButton);
+
+			document.body.appendChild(container);
+			getPojos(table, displayList);
+		}
+
+		function displayList(table, pojos) {
+
+			if(pojos.length > 0)
 			{
-				var characters = document.getElementById("characters");
-				var charactersJson = JSON.parse(request.responseText);	
-				
-				var first = true;
-				
-				for (const character of charactersJson) 
-				{
-					if (first)
-					{
-						var addButtonRow = document.createElement('div');
-						addButtonRow.className = "row";
-						
-						var addButton = document.createElement('a');
-						addButton.className = "btn btn-success btn-lg btn-block";
-						addButton.innerHTML = "Ajouter";
-						addButton.href = "formCharacter.html?id=0";
-						
-						addButtonRow.appendChild(addButton);
-						characters.appendChild(addButtonRow);
-						
-						addJsonKeysToDiv(characters, character);
-						first = false;
-					}
-					addJsonValuesToDiv(characters, character);				
+				displayKeys(table, pojos);
+				displayValues(table, pojos);
+			}
+		}
+
+		function displayKeys(table, pojos) {
+			var container = document.getElementById("container" + table);
+			var row = document.createElement("div");
+			row.className = "row";
+
+			var keys = Object.keys(pojos[0]);
+			for (key in keys) {
+				var col = document.createElement("div");
+				col.className = "col-sm-1 panel panel-default";
+				col.innerHTML = keys[key];
+				row.appendChild(col);
+			}
+			var col = document.createElement("div");
+			col.className = "panel panel-default col-sm-" + (12 - keys.length);
+			col.innerHTML = "Action";
+			row.appendChild(col);
+			container.appendChild(row);
+		}
+
+		function displayValues(table, pojos) {
+			var container = document.getElementById("container" + table);
+			var length = 0;
+
+			for (var i = 0; i < pojos.length; i++) {
+				var row = document.createElement("div");
+				row.className = "row form-group";
+
+				var pojo = pojos[i];
+				var length = Object.keys(pojos[i]).length;
+
+				for (value in pojos[i]) {
+					var col = document.createElement("div");
+					col.className = "col-sm-1";
+					col.style.wordWrap = "break-word";
+					col.innerHTML = pojos[i][value];
+					row.appendChild(col);
 				}
+				var col = document.createElement("div");
+				col.className = "col-sm-" + (12 - length);
+				var updateButton = document.createElement("a");
+				updateButton.className = "btn btn-warning btn-block btn-lg";
+				updateButton.innerHTML = "Modifier";
+				updateButton.href = "form" + table + ".html?id=" + pojo["id"];
+				col.appendChild(updateButton);
+				row.appendChild(col);
+				container.appendChild(row);
 			}
-			else
-			{
-				console.log("fail " + request.status);
-			}
-		};
-		request.send();
+		}
 	</script>
 </body>
 </html>

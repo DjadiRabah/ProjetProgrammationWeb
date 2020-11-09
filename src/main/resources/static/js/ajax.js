@@ -1,7 +1,7 @@
 function getPojoById(table, id, callBack)
 {
 	var request = new XMLHttpRequest();
-	request.open('GET', table + "?id="+id);
+	request.open('GET', table.toLowerCase() + "?id="+id);
 	
 	request.onload = function() {
 		if(request.status === 200)
@@ -32,7 +32,7 @@ function getPojos(table, callBack)
 			if (json === "")
 				callBack(null);
 			else
-				callBack(JSON.parse(json));
+				callBack(table, JSON.parse(json));
 		}
 		else
 		{
