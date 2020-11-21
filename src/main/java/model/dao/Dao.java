@@ -10,7 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Dao<T> {
+import model.pojo.Pojo;
+
+public abstract class Dao<T extends Pojo> {
 	public abstract Class<T> getPojoClass();
 
 	public abstract String getTableName();

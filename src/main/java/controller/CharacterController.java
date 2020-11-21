@@ -8,38 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
-import model.dao.Dao;
+import model.dao.CharacterDao;
 import model.dao.DaoFactory;
 import model.pojo.Character;
+import model.pojo.Pojo;
 
 @Controller
 public class CharacterController
 {	
-	@RequestMapping(value = "/character", method = RequestMethod.GET)
-	public @ResponseBody Character getCharacterById(HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException, IOException 
-	{
-		String idString = request.getParameter("id");
-		if (idString == null)
-			return null;
-		int id = Integer.parseInt(idString);
-		return DaoFactory.getInstance().getCharacterDao().getById(id);
-	}
-
-	
-	@RequestMapping(value = "/characters", method = RequestMethod.GET)
-	public @ResponseBody List<Character> getCharacters(HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException, IOException 
-	{
-		return DaoFactory.getInstance().getCharacterDao().getAll();
-	}
-	
 	@RequestMapping(value = "/updateCharacter", method = RequestMethod.GET)
 	public @ResponseBody void updateCharacter(HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException, IOException 
@@ -57,5 +40,34 @@ public class CharacterController
 		Character pojo = new Gson().fromJson(json, Character.class);
 		int id = DaoFactory.getInstance().getCharacterDao().insert(pojo);
 		return "/formCharacter.html?id="+id;
+	}
+
+	public CharacterDao getDao() 
+	{
+		return DaoFactory.getInstance().getCharacterDao();
+	}
+	
+	@RequestMapping(value = "/characters", method = RequestMethod.GET)
+	public @ResponseBody List<Character> getAll(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
+		try {
+				return getDao().getAll();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
+	@RequestMapping(value = "/character/{id}", method = RequestMethod.GET)
+	public @ResponseBody  Pojo getCharacterById( @PathVariable("id") int id)
+			throws UnsupportedEncodingException, IOException 
+	{
+//		String idString = request.getParameter("id");
+//		if (idString == null)
+//			return null;
+//		int id = Integer.parseInt(idString);
+		return getDao().getById(id);
 	}
 }

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Éditeur de niveau</title>
-<link rel="stylesheet" href="general.css">
+<meta name="viewport" charset="UTF-8">
+<title>Créateur d'histoires</title>
+<link rel="stylesheet" href="css/general.css">
 <script src="js/ajax.js"></script>
 <script src="js/json.js"></script>
 <script
@@ -13,12 +13,51 @@
 	<div class="container-fluid">
 		<a class="btn btn-info btn-lg btn-block" href="index.html">Retourner
 			au menu principal</a>
-		<h1 class="text-center">Éditeur de niveau</h1>
+		<h1 class="text-center">Créateur d'histoires</h1>
+		<h2 class="text-center">Les histoires</h2>
+		
+		<div class="form-group" id="divStory">
+				<select class="form-control" id="selectStory">
+				</select>
+		</div>
 	</div>
 	<script>
-		displayTable("Story", "Les histoires");
-		displayTable("Character", "Les personnages");
-		displayTable("Item", "Les items");
+		displayStories(); 
+		// displayTable("Story", "Les histoires");
+		// 		displayTable("Character", "Les personnages");
+		// 		displayTable("Item", "Les items");
+
+		function displayStories() 
+		{
+			var select = document.getElementById("selectStory");
+			
+			var request = new XMLHttpRequest();
+			request.open('GET', "stories");
+			
+			request.onload = function() {
+				if(request.status === 200)
+				{
+					var pojos = JSON.parse(request.responseText);
+					var select = document.getElementById("selectStory");
+					for(i in pojos)
+					{
+						var option = document.createElement("option");
+						option.value = pojos[i]["id"];
+						option.innerHTML = pojos[i]["name"];
+						select.appendChild(option);
+					}
+					var p = document.createElement("p");
+					p.innerHTML = pojos[i]["synopsis"];
+					document.getElementById("divStory").appendChild(p);
+				}
+				else
+				{
+					console.log("fail " + request.status);
+				}
+			};
+			request.send();
+			
+		}
 
 		function displayTable(table, title) {
 			var container = document.createElement("div");
@@ -41,8 +80,7 @@
 
 		function displayList(table, pojos) {
 
-			if(pojos.length > 0)
-			{
+			if (pojos.length > 0) {
 				displayKeys(table, pojos);
 				displayValues(table, pojos);
 			}

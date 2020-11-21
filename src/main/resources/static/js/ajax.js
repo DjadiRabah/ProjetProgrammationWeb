@@ -1,7 +1,7 @@
 function getPojoById(table, id, callBack)
 {
 	var request = new XMLHttpRequest();
-	request.open('GET', table.toLowerCase() + "?id="+id);
+	request.open('GET', table.toLowerCase() + "/"+id);
 	
 	request.onload = function() {
 		if(request.status === 200)
@@ -44,7 +44,6 @@ function getPojos(table, callBack)
 function insertPojo(table, jsonObject)
 {
 	var json = JSON.stringify(jsonObject);
-	var url = 
 	$.ajax({
         type: "GET",                     
         url:'/insert' + table,  
@@ -54,6 +53,7 @@ function insertPojo(table, jsonObject)
         success : function(data){
          },
          error : function(data) {
+        	 console.log("ERROR");
         	 window.location.href = data["responseText"];
          },
          done : function(data)

@@ -40,6 +40,14 @@
 			<version>2.9.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.apache.tapestry/tapestry-spring -->
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-spring</artifactId>
+			<version>5.6.1</version>
+		</dependency>
+
+
 	</dependencies>
 	<build>
 		<plugins>

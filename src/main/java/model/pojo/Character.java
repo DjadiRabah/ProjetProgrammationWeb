@@ -1,6 +1,6 @@
 package model.pojo;
 
-public class Character 
+public class Character implements Pojo
 {
 	private int id;
 	private String name;
