@@ -60,14 +60,16 @@ public class CharacterController
 		return null;
 	}
 	
-	@RequestMapping(value = "/character/{id}", method = RequestMethod.GET)
-	public @ResponseBody  Pojo getCharacterById( @PathVariable("id") int id)
+	@RequestMapping(value = "/character", method = RequestMethod.GET)
+	public @ResponseBody  Pojo getCharacterById( HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException, IOException 
 	{
-//		String idString = request.getParameter("id");
-//		if (idString == null)
-//			return null;
-//		int id = Integer.parseInt(idString);
+		String idString = request.getParameter("id");
+		if (idString == null)
+			return null;
+		int id = Integer.parseInt(idString);
 		return getDao().getById(id);
 	}
+	
+	
 }

@@ -29,5 +29,9 @@ public class DaoFactory
 	{
 		return StoryDao.getInstance();
 	}
+	public ScreenDao getScreenDao()
+	{
+		return ScreenDao.getInstance();
+	}
 
 }

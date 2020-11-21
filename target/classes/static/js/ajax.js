@@ -1,7 +1,7 @@
 function getPojoById(table, id, callBack)
 {
 	var request = new XMLHttpRequest();
-	request.open('GET', table.toLowerCase() + "/"+id);
+	request.open('GET', table.toLowerCase() + "?id="+id);
 	
 	request.onload = function() {
 		if(request.status === 200)

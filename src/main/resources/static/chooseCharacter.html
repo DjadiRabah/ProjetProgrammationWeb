@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" charset="UTF-8">
-<link rel="stylesheet" href="general.css">
+<link rel="stylesheet" href="css/general.css">
 
 <title>Choix personnage</title>
 </head>
@@ -71,7 +71,8 @@
 		</div>
 	</div>
 <div>
-<a href="index.html" class="btn btn-danger btn-lg btn-block">Commencer l'aventure</a>
+
+<a class="btn btn-danger btn-lg btn-block" onclick=setCookie() >Commencer l'aventure</a>
 <a href="index.html" class="btn btn-success btn-lg btn-block">Retour à l'accueil</a>
 	</div>
 	<script>
@@ -80,6 +81,17 @@ let maxCharacter = 0;
 
 displayCharacter();
 
+function setCookie(){
+	document.cookie = "hp ="+document.getElementById('life').innerHTML;
+	document.cookie = "name ="+document.getElementById('charactername').innerHTML;
+	document.cookie = "hpMax ="+document.getElementById('life').innerHTML;
+	document.cookie = "attack ="+document.getElementById('attack').innerHTML;
+	document.cookie = "dodge ="+document.getElementById('dodge').innerHTML;
+	document.cookie = "defense ="+document.getElementById('defense').innerHTML;
+	//console.log(document.getElementById('life').innerHTML);
+	window.location.href= ("screen.html");
+	
+}
 function displayCharacter(){		
 		var request = new XMLHttpRequest();
 		request.open('GET', 'characters');
