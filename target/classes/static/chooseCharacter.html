@@ -20,17 +20,17 @@
 			<div class="col-sm-4">
 				<a class="btn" onclick=changeCharacter(true)> <img
 					src="image/fleche_gauche.jpg" alt="fleche_gauche"
-					class="img-responsive" id="">
+					class="img-responsive center-block" id="">
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<img src="" alt="versus" class="img-responsive" id="perso">
+				<img src="" alt="versus" class="img-responsive center-block" id="perso">
 
 			</div>
 			<div class="col-sm-4">
 				<a class="btn" onclick=changeCharacter(false)> <img
 					src="image/fleche_droite.jpeg" alt="fleche_droite"
-					class="img-responsive" id="">
+					class="img-responsive center-block" id="">
 				</a>
 			</div>
 		
@@ -76,10 +76,12 @@
 <a href="index.html" class="btn btn-success btn-lg btn-block">Retour à l'accueil</a>
 	</div>
 	<script>
-let currentCharacter = 1;
+let currentCharacter = 0;
 let maxCharacter = 0;
+window.onload=function(){
+	displayCharacter();
+}
 
-displayCharacter();
 
 function setCookie(){
 	document.cookie = "hp ="+document.getElementById('life').innerHTML;
@@ -88,19 +90,21 @@ function setCookie(){
 	document.cookie = "attack ="+document.getElementById('attack').innerHTML;
 	document.cookie = "dodge ="+document.getElementById('dodge').innerHTML;
 	document.cookie = "defense ="+document.getElementById('defense').innerHTML;
-	//console.log(document.getElementById('life').innerHTML);
+
+	//console.log("fileName");
 	window.location.href= ("screen.html");
 	
 }
 function displayCharacter(){		
 		var request = new XMLHttpRequest();
-		request.open('GET', 'characters');
+		request.open('GET', 'charactersPlayable');
 		
 		request.onload = function() {
 			if(request.status === 200)
 			{
+				
 				var charactersJson = JSON.parse(request.responseText);	
-				console.log(charactersJson[currentCharacter]["filename"]);
+				document.cookie = "fileName="+(charactersJson[currentCharacter]["filename"]);
 				
 				document.getElementById('lorecharacter').innerHTML= charactersJson[currentCharacter]["lore"];
 				document.getElementById('charactername').innerHTML= charactersJson[currentCharacter]["name"];
@@ -109,6 +113,7 @@ function displayCharacter(){
 				document.getElementById('attack').innerHTML= charactersJson[currentCharacter]["attack"];
 				document.getElementById('defense').innerHTML= charactersJson[currentCharacter]["defense"];
 				document.getElementById('dodge').innerHTML= charactersJson[currentCharacter]["dodge"];
+				
 				maxCharacter = charactersJson.length;
 				
 				var perso = document.getElementById("perso");

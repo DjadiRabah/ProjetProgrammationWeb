@@ -70,6 +70,30 @@ public class CharacterController
 		int id = Integer.parseInt(idString);
 		return getDao().getById(id);
 	}
-	
+	@RequestMapping(value = "/charactersPlayable", method = RequestMethod.GET)
+    public @ResponseBody List<Character> getPlayableCharacters(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
+        try {
+                return getDao().getPlayableCharacters();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @RequestMapping(value = "/charactersUnplayable", method = RequestMethod.GET)
+    public @ResponseBody List<Character> getUnplayableCharacters(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
+        try {
+                return getDao().getUnplayableCharacters();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 	
 }

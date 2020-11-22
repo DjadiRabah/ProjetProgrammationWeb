@@ -81,4 +81,26 @@ function updatePojo(table, jsonObject)
          {
          }
   });
+
+}
+function getPlayableCharacters(callBack)
+{
+	var request = new XMLHttpRequest();
+	request.open('GET', "charactersPlayable");
+	
+	request.onload = function() {
+		if(request.status === 200)
+		{
+			var json = request.responseText;
+			if (json === "")
+				callBack(null);
+			else
+				callBack(JSON.parse(json));
+		}
+		else
+		{
+			console.log("fail " + request.status);
+		}
+	};
+	request.send();
 }

@@ -12,11 +12,13 @@ public class Screen implements Pojo {
 	private String action1;
 	private String action2;
 	private String action3;
-	
+	private String backGround;
 	public Screen() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 	/**
 	 * @param id
@@ -30,9 +32,10 @@ public class Screen implements Pojo {
 	 * @param action1
 	 * @param action2
 	 * @param action3
+	 * @param backGround
 	 */
 	public Screen(int id, String name, String message, int idCharacter, int idChest, int idScreen1, int idScreen2,
-			int idScreen3, String action1, String action2, String action3) {
+			int idScreen3, String action1, String action2, String action3, String backGround) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -45,7 +48,10 @@ public class Screen implements Pojo {
 		this.action1 = action1;
 		this.action2 = action2;
 		this.action3 = action3;
+		this.backGround = backGround;
 	}
+
+
 
 	/**
 	 * @return the id
@@ -201,13 +207,29 @@ public class Screen implements Pojo {
 		this.action3 = action3;
 	}
 
+	/**
+	 * @return the backGround
+	 */
+	public String getBackGround() {
+		return backGround;
+	}
+
+	/**
+	 * @param backGround the backGround to set
+	 */
+	public void setBackGround(String backGround) {
+		this.backGround = backGround;
+	}
+
 	@Override
 	public String toString() {
 		return "Screen [id=" + id + ", name=" + name + ", message=" + message + ", idCharacter=" + idCharacter
 				+ ", idChest=" + idChest + ", idScreen1=" + idScreen1 + ", idScreen2=" + idScreen2 + ", idScreen3="
-				+ idScreen3 + ", action1=" + action1 + ", action2=" + action2 + ", action3=" + action3 + "]";
+				+ idScreen3 + ", action1=" + action1 + ", action2=" + action2 + ", action3=" + action3 + ", backGround="
+				+ backGround + "]";
 	}
 
+	
 	
 	
 	

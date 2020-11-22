@@ -17,37 +17,14 @@
 <div class="container text-center" >
 	
   <div class="row row-eq-height"  id="combat">
-  <!--
-   <div class="col-sm-4 "  id="balise_gentil">
-      <img src="" alt="gentil" class="img-responsive" id="gentil">
-      
-       <div class="progress progress-striped active">
- 		 <div class="progress-bar" style="width: 70%"> pdv/pdv</div>
-		</div> 
-		
-    </div>
-    <div class="col-sm-4">
-      <img src="image/versus.jpg" alt="versus" class="img-responsive" id="versus" >
-    	
-    </div>
-    <div class="col-sm-4">
-    
-     	<img src="image/orc.jpg" alt="gentil" class="img-responsive" id="mechant" >
-      
-       	<div class="progress progress-striped active" id="balise_mechant">
- 		 <div class="progress-bar" style="width: 70%" > pdv/pdv</div>
-		</div>
-    </div> -->
+
   </div>
 </div>
 </div>
 
 </br>
 </br>
-<!--<div class="container jumbotron" id="se_Passe">
-  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
- 
-</div> -->
+
 
 
 <div class="container jumbotron" id="action">
@@ -60,137 +37,184 @@
 
 
 
-
 <script>
-	
+
+		var killed = [];	
+		getPojoById("screen",1, setScreen);
 		
-</script>
-
-<script>
-		//getPojoById("screen",23, setScreen);
-		window.onload = function ()
+		function changeBackground(fileName) 
 		{
-				getPojoById("screen",1, setScreen);
-		}
+			document.body.style.backgroundRepeat = "no-repeat";
+			document.body.style.backgroundSize = "cover";
+       		document.body.style.backgroundImage = "url(image/"+fileName+")";
+		}	
 		function setScreen (screen)
 		{
-			document.getElementById("combat").innerHTML="";
-			document.getElementById("action2").style.display = "none";
-			document.getElementById("action3").style.display = "none";
-			if (document.getElementById('happened') != undefined)
-			{
-				document.body.removeChild(document.getElementById('happened'));
-			}
+			changeBackground(screen["backGround"]);
 			
-			document.getElementById("contexte").innerHTML= screen["message"];
-			
-			if (screen["idCharacter"] == 0)
+			if (screen["idScreen1"] == "0")
 			{
+				
+				document.getElementById("action1").innerHTML= "Retourner à l'accueil";
+				document.getElementById("action1").href = "chooseCharacter.html";
 				
 				var div1 = document.createElement("div");
-				div1.className = "col-sm-2";
-				var div2 = document.createElement("div");
-				div2.className = "col-sm-2";
-				var character = document.createElement("div");
-				character.className = "col-sm-8";
-				var barre = document.createElement("div");
-				barre.className = "progress progress-striped active";
-				var pdv = document.createElement("div");
-				pdv.className = "progress-bar";
-				pdv.style = "width:"+parseFloat(findValueCookie("hp"))/parseFloat(findValueCookie("hpMax"))*100+"%";
-				pdv.innerHTML = findValueCookie("hp")+"/"+findValueCookie("hpMax");
-				var image = document.createElement("img");
-				image.className = "img";
-				image.src = "image/nain.jpg";
-				image.alt = "gentil";
-				character.appendChild(image);
-				
-				document.getElementById("combat").appendChild(div1);
-				
-				document.getElementById("combat").appendChild(character);
-				document.getElementById("combat").appendChild(div2);
-				barre.appendChild(pdv);
-				character.appendChild(barre);
-				
-				
-				if (screen["action1"] != "NULL")
-				{
-					document.getElementById("action1").style.display = "block";
-					document.getElementById("action1").innerHTML=screen["action1"];
-					document.getElementById("action1").onclick = setNextScreen.bind(this, [screen["idScreen1"]]) ;
-	
-				}
-				if (screen["action2"] != "NULL")
-				{
-					document.getElementById("action2").style.display = "block";
-					document.getElementById("action2").innerHTML=screen["action2"];
-					document.getElementById("action2").onclick = setNextScreen.bind(this, [screen["idScreen2"]]) ;
-				}
-				if (screen["action3"] != "NULL")
-				{
-					document.getElementById("action3").style.display = "block";
-					document.getElementById("action3").innerHTML=screen["action3"];
-					document.getElementById("action3").onclick = setNextScreen.bind(this, [screen["idScreen3"]]) ;
-				}
-				
-				
+					div1.className = "col-sm-2";
+					var div2 = document.createElement("div");
+					div2.className = "col-sm-2";
+					var character = document.createElement("div");
+					character.className = "col-sm-8";
+					var barre = document.createElement("div");
+					barre.className = "progress progress-striped active";
+					var pdv = document.createElement("div");
+					pdv.className = "progress-bar";
+					pdv.style = "width:"+parseFloat(findValueCookie("hp"))/parseFloat(findValueCookie("hpMax"))*100+"%";
+					pdv.innerHTML = findValueCookie("hp")+"/"+findValueCookie("hpMax");
+					var image = document.createElement("img");
+					image.className = "img-responsive center-block";
+					image.src = "image/"+findValueCookie("fileName");
+					image.alt = "gentil";
+					character.appendChild(image);
+					
+					document.getElementById("combat").appendChild(div1);
+					
+					document.getElementById("combat").appendChild(character);
+					document.getElementById("combat").appendChild(div2);
+					barre.appendChild(pdv);
+					character.appendChild(barre);
+					document.getElementById("contexte").innerHTML= screen["message"];
+					
+					
+					if (killed.length == 0)
+					{
+						document.getElementById("happened").innerHTML="vous êtes nul vous avez tué personne";
+					}
+					else 
+					{
+					document.getElementById("happened").innerHTML="Vous avez tué :"+killed;	
+					}
+					
 			}
 			else
 			{
-				console.log("set screen");
-				getPojoById("character",screen["idCharacter"], setEnemy);
+				document.getElementById("combat").innerHTML="";
+				document.getElementById("action2").style.display = "none";
+				document.getElementById("action3").style.display = "none";
+				if (document.getElementById('happened') != undefined)
+				{
+					document.body.removeChild(document.getElementById('happened'));
+				}
 				
-				//gentil
-				var character = document.createElement("div");
-				character.className = "col-sm-4";
-				var barre = document.createElement("div");
-				barre.className = "progress progress-striped active";
-				var pdv = document.createElement("div");
-				pdv.className = "progress-bar";
-				var width = parseFloat(findValueCookie("hp"))/parseFloat(findValueCookie("hpMax"))*100;
-				//id gentil
-				pdv.id= "pdv";
+				document.getElementById("contexte").innerHTML= screen["message"];
 				
-				pdv.style = "width:"+width+"%";
-				pdv.innerHTML = findValueCookie("hp")+"/"+findValueCookie("hpMax");
-				var image = document.createElement("img");
-				image.className = "img-responsive";
-				image.src = "image/nain.jpg";
-				image.alt = "gentil";
-				character.appendChild(image);
+				if (screen["idCharacter"] == 0)
+				{
+					
+					var div1 = document.createElement("div");
+					div1.className = "col-sm-2";
+					var div2 = document.createElement("div");
+					div2.className = "col-sm-2";
+					var character = document.createElement("div");
+					character.className = "col-sm-8";
+					var barre = document.createElement("div");
+					barre.className = "progress progress-striped active";
+					var pdv = document.createElement("div");
+					pdv.className = "progress-bar";
+					pdv.style = "width:"+parseFloat(findValueCookie("hp"))/parseFloat(findValueCookie("hpMax"))*100+"%";
+					pdv.innerHTML = findValueCookie("hp")+"/"+findValueCookie("hpMax");
+					var image = document.createElement("img");
+					image.className = "img-responsive center-block";
+					image.src = "image/"+findValueCookie("fileName");
+					image.alt = "gentil";
+					character.appendChild(image);
+					
+					document.getElementById("combat").appendChild(div1);
+					
+					document.getElementById("combat").appendChild(character);
+					document.getElementById("combat").appendChild(div2);
+					barre.appendChild(pdv);
+					character.appendChild(barre);
+					
+					
+					if (screen["action1"] != "NULL")
+					{
+						document.getElementById("action1").style.display = "block";
+						document.getElementById("action1").innerHTML=screen["action1"];
+						document.getElementById("action1").onclick = setNextScreen.bind(this, [screen["idScreen1"]]) ;
+		
+					}
+					if (screen["action2"] != "NULL")
+					{
+						document.getElementById("action2").style.display = "block";
+						document.getElementById("action2").innerHTML=screen["action2"];
+						document.getElementById("action2").onclick = setNextScreen.bind(this, [screen["idScreen2"]]) ;
+					}
+					if (screen["action3"] != "NULL")
+					{
+						document.getElementById("action3").style.display = "block";
+						document.getElementById("action3").innerHTML=screen["action3"];
+						document.getElementById("action3").onclick = setNextScreen.bind(this, [screen["idScreen3"]]) ;
+					}
+					
+					
+				}
+				else
+				{
+					
+					getPojoById("character",screen["idCharacter"], setEnemy);
+					
+					//gentil
+					var character = document.createElement("div");
+					character.className = "col-sm-4";
+					var barre = document.createElement("div");
+					barre.className = "progress progress-striped active";
+					var pdv = document.createElement("div");
+					pdv.className = "progress-bar";
+					var width = parseFloat(findValueCookie("hp"))/parseFloat(findValueCookie("hpMax"))*100;
+					//id gentil
+					pdv.id= "pdv";
+					
+					pdv.style = "width:"+width+"%";
+					pdv.innerHTML = findValueCookie("hp")+"/"+findValueCookie("hpMax");
+					var image = document.createElement("img");
+					image.className = "img-responsive center-block";
+					image.src = "image/"+findValueCookie("fileName");
+					image.alt = "gentil";
+					character.appendChild(image);
+					
+					document.getElementById("combat").appendChild(character);
+					barre.appendChild(pdv);
+					character.appendChild(barre);
+					
+					//versus
+					var versus = document.createElement("div");
+					versus.className = "col-sm-4";
+									
+					var image = document.createElement("img");
+					image.className = "img-responsive center-block";
+					image.src = "image/versus.jpg";
+					image.alt = "versus";
+					versus.appendChild(image);
+					document.getElementById("combat").appendChild(versus);
+					
+					//Ce qui se passe
 				
-				document.getElementById("combat").appendChild(character);
-				barre.appendChild(pdv);
-				character.appendChild(barre);
-				
-				//versus
-				var versus = document.createElement("div");
-				versus.className = "col-sm-4";
-								
-				var image = document.createElement("img");
-				image.className = "img-responsive";
-				image.src = "image/versus.jpg";
-				image.alt = "versus";
-				versus.appendChild(image);
-				document.getElementById("combat").appendChild(versus);
-				
-				//Ce qui se passe
-			
-				var happened = document.createElement("div");
-				happened.className = "container jumbotron";
-				happened.id = "happened";
-				document.body.appendChild(happened);
-				
-				//Action
-				document.getElementById("action1").style.display = "block";
-				document.getElementById("action1").innerHTML= "taper";
-				document.getElementById("action1").onclick = attack;
-				
-				//(hpKey,defenseKey,nameKey,dodgeKey,attackEKey)
-				
-				document.cookie = "screen1="+screen["idScreen1"];
-
-			}
+					var happened = document.createElement("div");
+					happened.className = "container jumbotron";
+					happened.id = "happened";
+					document.body.appendChild(happened);
+					
+					//Action
+					document.getElementById("action1").style.display = "block";
+					document.getElementById("action1").innerHTML= "taper";
+					document.getElementById("action1").onclick = attack;
+					
+					//(hpKey,defenseKey,nameKey,dodgeKey,attackEKey)
+					
+					document.cookie = "screen1="+screen["idScreen1"];
+	
+				}
+		}
 		}
 </script>
 
@@ -199,8 +223,11 @@
 <script>
 	function setNextScreen(id)
 	{
+		document.getElementById("action2").style.display = "none";
+		document.getElementById("action3").style.display = "none";
 		document.getElementById("combat").innerHTML= "";
 		getPojoById("screen",id, setScreen);
+		
 		
 	}
 	
@@ -238,15 +265,14 @@
 				document.cookie = "dodgeE ="+character["dodge"];
 				document.cookie = "defenseE ="+character["defense"];
 				
-				console.log(document.cookie);
-				
 		
 	}
 	function attack()
 	{
-		
+		var audio = new Audio('audio/hit.mp3');
+		audio.play();
 		document.getElementById('happened').innerHTML= "";
-		console.log(document.cookie);
+		
 		
 		
 		if((parseInt(findValueCookie("hp")) != 0 ) && (parseInt(findValueCookie("hpE")) != 0))
@@ -256,14 +282,15 @@
 			
 			if (parseInt(findValueCookie("hp")) == 0)
 			{
-				document.getElementById('happened').innerHTML+="Vous èté mort";
-				document.getElementById("action1").innerHTML= "Retourner a l'acceuille";
-				document.getElementById("action1").href = "chooseCharacter.html";
+				
+				document.getElementById('happened').innerHTML+="Vous êtes mort";
+				setNextScreen(35);
+				
 				
 			}
 			else if(parseInt(findValueCookie("hpE")) == 0)
 			{
-				
+				killed.push(findValueCookie("nameE"));
 				document.getElementById('happened').innerHTML+="Vous avez terrassé "+findValueCookie("nameE");
 				document.getElementById("action1").innerHTML="Avancer";
 				document.getElementById("action1").onclick = setNextScreen.bind(this, [findValueCookie("screen1")]) ;
@@ -279,8 +306,8 @@
 		defense = parseInt(findValueCookie(defenseKey));
 		name = findValueCookie(nameKey);
 		dodge = parseFloat(findValueCookie(dodgeKey));
-		attack = parseInt(findValueCookie(attackKey));
-		console.log(dodge);
+		attackcookie = parseInt(findValueCookie(attackKey));
+	
 		
 		if (Math.random() < dodge)
 		{
@@ -292,14 +319,14 @@
 		{
 			
 			document.getElementById('happened').innerHTML+= name +" à été touché </br>";
-			 if (attack > hp + defense)
+			 if (attackcookie > hp + defense)
 			{
 				
 				hp = 0;
 			}
 			else
 			{
-				hp = hp - attack + defense; 	
+				hp = hp - attackcookie + defense; 	
 			}
 			
 			pdvattaque.style = "width:"+ hp/hpmax*100+"%"; 
