@@ -10,6 +10,7 @@ public class Character implements Pojo
 	private int attack;
 	private int defense;
 	private double dodge;
+	private int playable = 1;
 	
 
 	/**
@@ -153,6 +154,23 @@ public class Character implements Pojo
 	 */
 	public void setDodge(double dodge) {
 		this.dodge = dodge;
+	}
+	
+	
+	
+
+	/**
+	 * @param playable the playable to set
+	 */
+	public void setPlayable(int playable) {
+		this.playable = playable;
+	}
+
+	/**
+	 * @return the playable
+	 */
+	public int getPlayable() {
+		return playable;
 	}
 
 	@Override
